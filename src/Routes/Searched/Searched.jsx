@@ -5,15 +5,14 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 const Searched = () => {
-  const { loading, setLoading, status, setStatus, BASE } =
-    useContext(UserContext);
+  const { loading, setLoading, status, setStatus, BASE } = useContext(UserContext);
   const { item } = useParams();
   const [data, setData] = useState([]);
 
-  async function FetchForQuery() {
+  async function fetchForQuery() {
     try {
       setLoading(true);
-      const response = await Axios.post(`${BASE}/searchs`, item);
+      const response = await Axios.post(`${BASE}/searchs`, { search: item });
       if (response.status === 200) {
         setData(response.data);
       } else if (response.status === 404) {
@@ -27,8 +26,8 @@ const Searched = () => {
   }
 
   useEffect(() => {
-    FetchForQuery();
-  }, [item]);
+    fetchForQuery();
+  }, []);
 
   return (
     <div>
