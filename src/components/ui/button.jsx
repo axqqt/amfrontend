@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground transition-all",
         link: "text-primary underline-offset-4 hover:underline transition-all",
         white: "text-black bg-white hover:bg-transparent hover:text-white border border-outline transition-all",
+        whiteMobile: "text-black text-xs bg-white hover:bg-transparent hover:text-white border border-outline transition-all"
       },
       size: {
         default: "h-10 px-4 py-2",

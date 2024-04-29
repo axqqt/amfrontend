@@ -29,18 +29,18 @@ function FeedbackSection() {
     }
   }
   return (
-    <section className="w-full mt-5 py-5">
+    <section className="w-full mt-5 py-5" id="feedback">
       <div className="container flex flex-col justify-between items-center">
-        <h1 className="text-5xl text-white font-bold mb-5">Leave a Feedback</h1>
-        <h3 className="text-3xl text-muted font-bold mt-5">
+        <h1 className="md:text-5xl text-3xl text-white font-bold mb-5 text-center">Leave a Feedback</h1>
+        <h3 className="md:text-3xl text-xl text-muted  text-center font-bold mt-5">
           We would really appreciate your feedback for{" "}
           <span className="text-primary">Improvement!</span>
         </h3>
-        <h3 className="text-white text-2xl mt-3 mb-5">
+        <h3 className="text-white text-start md:text-2xl mt-3 mb-5 hidden md:flex">
           Don't Worry It's Completely Anonymous :)
         </h3>
         
-          <form onSubmit={AddFeedback} className="flex justify-between items-center gap-3 mt-5">
+          <form onSubmit={AddFeedback} className="flex justify-between items-center lg:w-auto md:w-full gap-3 mt-5">
             <Input type="text" placeholder="Leave a Feedback" onChange={(e) => {
             setMsg(e.target.value);
           }}/>
@@ -48,6 +48,9 @@ function FeedbackSection() {
               Submit
             </Button>
           </form>
+          <h3 className="text-muted text-center text-xl mt-5 mb-5 md:hidden flex">
+          Don't Worry It's Completely Anonymous :)
+        </h3>
         </div>
     </section>
   );

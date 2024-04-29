@@ -34,18 +34,18 @@ const Product = () => {
   }, [id]);
 
   return (
-    <section className="h-screen w-full p-24">
+    <section className="h-full flex w-full md:p-24">
       {loading ? (
         <h1>Loading...</h1>
       ) : (
         <div className="container">
-          <div className="flex justify-between items-center w-full">
-            <div className="flex justfiy-center items-center w-1/2">
+          <div className="flex md:justify-between flex-col md:flex-row justify-center gap-6 flex-auto items-center w-full">
+            <div className="flex justfiy-center items-center md:w-1/2">
               <div className="">
                 <video
-                  className="aspect-auto rounded-lg"
-                  width={480}
-                  height={640}
+                  className="aspect-auto rounded-lg w-full h-full"
+                  width={720}
+                  height={1280}
                   controls
                 >
                   <source src={Data.video} type="video/mp4" />
@@ -56,15 +56,15 @@ const Product = () => {
                 </div> */}
               </div>
             </div>
-            <div className="w-1/2 flex flex-col justify-between items-start gap-6">
+            <div className="md:w-1/2 flex flex-col justify-between items-start gap-6 w-full">
             <div className="p-10 rounded-xl border border-border w-full">
               <Badge>{Data.category}</Badge>
               <h1 className="text-4xl text-primary font-bold mt-5">{Data.title}</h1>
-              <p className="text-muted mt-5 text-start text-sm">
+              <p className="text-muted mt-5 text-center md:text-start text-xs md:text-sm">
                 {Data.description}
               </p>
-              <p className="text-white font-bold text-2xl mt-5">
-                Commission: ${Data.commission}
+              <p className="text-white md:text-start text-center font-bold text-2xl mt-5">
+                Commission: {Data.commission}%
               </p>
 
             </div>

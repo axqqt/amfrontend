@@ -5,7 +5,8 @@ import Axios from "axios";
 import { UserContext } from "@/App";
 
 function ProductsSection() {
-  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
+  const { company, loading, setLoading, BASE, status, setStatus } =
+    useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
 
@@ -37,11 +38,14 @@ function ProductsSection() {
   };
 
   return (
-    <section className="px-24 py-12 justify-center items-start" id="products">
-      <div className="container">
+    <section
+      className="lg:px-24 py-12 justify-center items-start"
+      id="products"
+    >
+      <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
-          <div className="flex justify-between items-center">
+          <div className="md:flex justify-between items-center hidden">
             <Search />
 
             <select
@@ -55,9 +59,25 @@ function ProductsSection() {
               <option value="beauty">Beauty</option>
             </select>
           </div>
-        </div>
 
-        <div className="grid grid-cols-3 gap-6 gap-x-6 mt-5">
+          <div className="flex justify-between items-center md:hidden">
+            <select
+              value={selectedType}
+              className="p-2 rounded-lg"
+              onChange={handleTypeChange}
+            >
+              <option value="all">All</option>
+              <option value="clothing">Clothing</option>
+              <option value="health">Health Care</option>
+              <option value="beauty">Beauty</option>
+            </select>
+          </div>
+        </div>
+          <div className="w-full md:hidden">
+            <Search />
+          </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5">
           {loading ? (
             <div>Loading...</div>
           ) : (
@@ -99,13 +119,12 @@ function ProductsSection() {
                           width={"full"}
                           className="rounded-xl hover:opacity-70 transition-all hover:scale-105"
                         />
- 
+
                         <div className="flex justify-between items-center w-full">
                           <div>
                             <h1 className="text-white font-bold">
                               {item.title}
                             </h1>
-                           
                           </div>
 
                           <div className="flex flex-col justify-between items-end">

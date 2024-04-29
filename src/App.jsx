@@ -14,6 +14,7 @@ const Home = React.lazy(() => import("./Routes/Home/Home"));
 const Register = React.lazy(() => import("./Routes/Manage/Register/Register"));
 const Login = React.lazy(() => import("./Routes/Manage/Login/Login"));
 const Nav = React.lazy(() => import("./Routes/Navbar/Nav"));
+const BottomNav = React.lazy(() => import("./Routes/BottomNav/BottomNav"))
 const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
 const Product = React.lazy(() => import("./Routes/Product/Product"));
@@ -64,7 +65,7 @@ function App({location}) {
   }, [location.pathname, setCompany]);
 
   return (
-    <section className="bg-black flex flex-col justify-center items-center">
+    <section className="bg-black flex flex-col justify-center items-center w-full">
       
         <UserContext.Provider value={theStates}>
          
@@ -87,8 +88,8 @@ function App({location}) {
               <Route path="*" element={<NotFound />} />
             </Routes>
             
-          </Suspense>
           
+          </Suspense>
         </UserContext.Provider>
      <Footer/>
     </section>

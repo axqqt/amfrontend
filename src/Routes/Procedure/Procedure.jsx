@@ -3,14 +3,14 @@ import "./Procedure.css"; // Import CSS file for styling
 
 const Procedure = () => {
   return (
-    <section className=" flex flex-col text-white justify-center items-center h-full p-24 gap-6 w-full">
+    <section className=" flex flex-col text-white justify-center items-center h-full md:p-24 p-5 gap-6 w-full">
       {" "}
       {/* Apply a class for styling */}
-      <h1 className="font-bold text-4xl text-primary">Procedure of Affiliate Marketing</h1>
-      <div className="w-full flex flex-col justify-between items-center gap-6">
+      <h1 className="font-bold text-4xl text-primary text-center">Procedure of Affiliate Marketing</h1>
+      <div className="w-full flex flex-col justify-center  items-center gap-6">
 
-        <div className="flex justify-between w-full gap-6 p-10 bg-slate-900 shadow-xl shadow-primary rounded-xl border border-border">
-          <h2 className="flex items-center text-xl font-bold ">For Affiliates</h2>
+        <div className="flex flex-col justify-center  w-full gap-6 p-10 bg-slate-900 shadow-xl shadow-primary rounded-xl border border-border">
+          <h2 className="flex items-center text-3xl font-bold ">For Affiliates</h2>
           <ol className="flex flex-col justify-between gap-6">
             <li>
               <strong className="text-xl">1. Choose Your Niche:</strong>
@@ -53,8 +53,8 @@ const Procedure = () => {
           </ol>
         </div>
 
-        <div className="flex justify-between w-full gap-6 p-10 mt-5 bg-slate-900  shadow-xl shadow-white rounded-xl border border-border">
-          <h2 className="flex items-center text-xl font-bold">For Companies</h2>
+        <div className="flex justify-center flex-col w-full gap-6 p-10 mt-5 bg-slate-900  shadow-xl shadow-white rounded-xl border border-border">
+          <h2 className="flex items-center text-3xl font-bold">For Companies</h2>
           <ol className="flex flex-col justify-between gap-6">
             <li>
               <strong className="text-xl">
