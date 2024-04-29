@@ -14,6 +14,8 @@ const Login = React.lazy(() => import("./Routes/Manage/Login/Login"));
 const Nav = React.lazy(() => import("./Routes/Navbar/Nav"));
 const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
+const Product = React.lazy(() => import("./Routes/Product/Product"));
+const Contact = React.lazy(() => import("./Routes/Contact/Contact"));
 
 export const UserContext = createContext();
 
@@ -69,8 +71,10 @@ function App({location}) {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/procedure" element={<Procedure/>}></Route>
+              <Route path="/product/:id" element={<Product />} />
               {company.gmail && (
                 <Route path="/create" element={<Create />}></Route>
               )}

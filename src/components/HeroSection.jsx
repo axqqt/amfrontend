@@ -15,8 +15,8 @@ function HeroSection() {
               Sales!
             </h2>
             <div className="flex justify-between items-center gap-6 mt-5">
-              <Button>Get Started</Button>
-              <Link to="#products"><Button variant="outline">Explore Products</Button></Link>
+              <Link to="/procedure"><Button>Get Started</Button></Link>
+              <a href="#products" className="transition-all"><Button variant="outline">Explore Products</Button></a>
             </div>
           </div>
           <div>

@@ -20,7 +20,7 @@ function Footer() {
             <div className="flex justify-between items-start gap-6">
                 <div className="flex flex-col justify-between items-start">
                     <h1 className="text-white font-bold mb-5">AFFILIATED</h1>
-                    <Link to="/about" className="text-muted mt-2 hover:text-white transition-all">Explore</Link>
+                    <a href="#products" className="text-muted mt-2 hover:text-white transition-all">Explore</a>
                     <Link to="/contact" className="text-muted mt-2 hover:text-white transition-all">Contact Us</Link>
                     <Link to="/procedure" className="text-muted mt-2 hover:text-white transition-all">How to get started?</Link>
                     
@@ -28,7 +28,7 @@ function Footer() {
                 <div className="flex flex-col justify-between items-start">
                     <h1 className="text-white font-bold mb-5">ACCOUNT</h1>
                     <Link to="/login" className="text-muted mt-2 hover:text-white transition-all">Sign in</Link>
-                    <Link to="/feedback" className="text-muted mt-2 hover:text-white transition-all">Feedback</Link>
+                    <a href="#feedback" className="text-muted mt-2 hover:text-white transition-all">Feedback</a>
                     
                 </div>
             </div>

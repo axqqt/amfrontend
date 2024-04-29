@@ -5,8 +5,7 @@ import Axios from "axios";
 import { UserContext } from "@/App";
 
 function ProductsSection() {
-  const { company, loading, setLoading, BASE, status, setStatus } =
-    useContext(UserContext);
+  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
 
@@ -44,7 +43,7 @@ function ProductsSection() {
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
           <div className="flex justify-between items-center">
             <Search />
-            
+
             <select
               value={selectedType}
               className="p-2 rounded-lg"
@@ -57,6 +56,7 @@ function ProductsSection() {
             </select>
           </div>
         </div>
+
         <div className="grid grid-cols-3 gap-6 gap-x-6 mt-5">
           {loading ? (
             <div>Loading...</div>
@@ -69,11 +69,12 @@ function ProductsSection() {
                       selectedType === "all" || item.category === selectedType
                   )
                   .map((item) => (
-                    <div
-                      key={item._id}
-                      className="flex flex-col justify-between gap-3 items-center"
-                    >
-                      {/* <h1 className="text-white">{item.title}</h1>
+                    <Link to={`/product/${item._id}`} key={item._id}>
+                      <div
+                        key={item._id}
+                        className="flex flex-col justify-between gap-3 items-center"
+                      >
+                        {/* <h1 className="text-white">{item.title}</h1>
                     <h2 className="text-muted">{item.description}</h2>
                     <h3 className="text-muted">
                       Commission rate: {item.commission}
@@ -92,13 +93,13 @@ function ProductsSection() {
                         {`Click here to get started with ${item.title}`}
                       </Link>
                     )} */}
-                      <img
-                        src="/productImage.webp"
-                        alt="product"
-                        width={"full"}
-                        className="rounded-xl hover:opacity-70 transition-all hover:scale-105"
-                      />
-                      <Link className="w-full" to={item.video.link}>
+                        <img
+                          src="/productImage.webp"
+                          alt="product"
+                          width={"full"}
+                          className="rounded-xl hover:opacity-70 transition-all hover:scale-105"
+                        />
+
                         <div className="flex justify-between items-center w-full">
                           <div>
                             <h1 className="text-white font-bold">
@@ -119,8 +120,8 @@ function ProductsSection() {
                             </h3>
                           </div>
                         </div>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   ))
               ) : (
                 <h1>No results found</h1>
