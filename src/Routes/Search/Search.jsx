@@ -3,30 +3,18 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 import { Button } from "@/components/ui/button";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const { company, loading, setLoading, BASE, status, setStatus } =
     useContext(UserContext);
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
+  const navigator = useNavigate();
 
   async function Search(e) {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await Axios.post(`${BASE}/searchs`, search);
-      if (response.status === 200) {
-        setData(response.data);
-      } else if (response.status === 404) {
-        setStatus("No results found");
-      } else {
-        setStatus("Error!");
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    navigator(`/search/${search}`) //search is item
   }
 
   return (

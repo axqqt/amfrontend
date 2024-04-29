@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useContext, createContext, useEffect, Suspense } from "react";
 import "./index.css";
@@ -6,6 +7,7 @@ import NotFound from "./Routes/NotFound/NotFound";
 
 import Procedure from "./Routes/Procedure/Procedure";
 import Footer from "./components/Footer";
+import Searched from "./Routes/Searched/Searched";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -74,7 +76,9 @@ function App({location}) {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/search/:item" element={<Searched/>}></Route>
               <Route path="/procedure" element={<Procedure/>}></Route>
               <Route path="/product/:id" element={<Product />} />
               {company.gmail && (

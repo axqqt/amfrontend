@@ -114,7 +114,7 @@ function ProductsSection() {
                             </p>
                             <h3 className="text-white mt-3">
                               {/* {item.commission} */}
-                              commision: $ {item.commission}
+                              commision: {item.commission}%/Sale
                             </h3>
                           </div>
                         </div>

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 const Register = () => {
   const { loading, setLoading, status, setStatus, BASE } =
     useContext(UserContext);
-  const [gmail, setGmail] = useState("");
+  const [user,setUser]  = useState({gmail:"",password:""})
   const navigator = useNavigate();
 
   async function userRegister(e) {
@@ -16,7 +16,7 @@ const Register = () => {
     setStatus("");
     try {
       setLoading(true);
-      const response = await Axios.post(`${BASE}/users/register`, { gmail });
+      const response = await Axios.post(`${BASE}/users/register`, { user });
       if (response.status === 201) {
         setStatus("Registration complete! Redirecting to login...");
         setTimeout(() => {
@@ -33,6 +33,10 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleChange = (e)=>{
+    setUser({...user,[e.target.name]:e.target.value})
   }
 
   return (
@@ -73,11 +77,20 @@ const Register = () => {
               >
                 <Input
                   type="email"
-                  value={gmail}
-                  onChange={(e) => setGmail(e.target.value)}
+          
+                  onChange={handleChange}
                   name="gmail"
                   className="w-full"
                   placeholder="Enter email..."
+                  required
+                />
+                              <Input
+                  type="password"
+          
+                  onChange={handleChange}
+                  name="password"
+                  className="w-full"
+                  placeholder="Enter password..."
                   required
                 />
                 <Button type="submit" className="mt-5" disabled={loading}>
