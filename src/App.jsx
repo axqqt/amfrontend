@@ -16,6 +16,7 @@ const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
 const Product = React.lazy(() => import("./Routes/Product/Product"));
 const Contact = React.lazy(() => import("./Routes/Contact/Contact"));
+const ChatBox = React.lazy(() => import ("./Routes/ChatBox/ChatBox"));
 
 export const UserContext = createContext();
 
@@ -67,6 +68,7 @@ function App({location}) {
          
           <Suspense fallback={<div>Loading...</div>}>
             <Nav />
+            <ChatBox />
             {/* <Search /> */}
             <Routes>
               <Route path="/" element={<Home />} />

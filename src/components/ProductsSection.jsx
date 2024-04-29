@@ -72,7 +72,7 @@ function ProductsSection() {
                     <Link to={`/product/${item._id}`} key={item._id}>
                       <div
                         key={item._id}
-                        className="flex flex-col justify-between gap-3 items-center"
+                        className="flex flex-col justify-between gap-6 items-center"
                       >
                         {/* <h1 className="text-white">{item.title}</h1>
                     <h2 className="text-muted">{item.description}</h2>
@@ -99,15 +99,13 @@ function ProductsSection() {
                           width={"full"}
                           className="rounded-xl hover:opacity-70 transition-all hover:scale-105"
                         />
-
+ 
                         <div className="flex justify-between items-center w-full">
                           <div>
                             <h1 className="text-white font-bold">
                               {item.title}
                             </h1>
-                            <h2 className="text-muted text-sm mt-3">
-                              {item.description}
-                            </h2>
+                           
                           </div>
 
                           <div className="flex flex-col justify-between items-end">
