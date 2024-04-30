@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import "./index.css";
 import Procedure from "./Routes/Procedure/Procedure";
-import Footer from "./components/Footer";
+
 import Searched from "./Routes/Searched/Searched";
 import FeedbackSection from "./components/FeedbackSection";
 import SeeMore from "./Routes/Home/SeeMore/SeeMore";
@@ -18,6 +18,7 @@ const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
 const Product = React.lazy(() => import("./Routes/Product/Product"));
 const Contact = React.lazy(() => import("./Routes/Contact/Contact"));
+const Footer = React.lazy(() => import ("./Routes/Footer/Footer"));
 const ChatBox = React.lazy(() => import("./Routes/ChatBox/ChatBox"));
 
 export const UserContext = React.createContext();
@@ -90,8 +91,8 @@ function App({ location }) {
             <Route path="/search/:item" element={<Searched />} />
             <Route path="/procedure" element={<Procedure />} />
             <Route path="/product/:id" element={<Product />} />
-            {/* {company && company.gmail && <Route path="/create" element={<Create />} />} */}
-            <Route path="/create" element={<Create />} />
+             {company && company.gmail && <Route path="/create" element={<Create />} />}
+          {/* <Route path="/create" element={<Create />} /> */}
           </Routes>
         </Suspense>
       </UserContext.Provider>

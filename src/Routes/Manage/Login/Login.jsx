@@ -17,6 +17,7 @@ const Login = () => {
       setLoading(true);
       
       // Assuming creds is defined somewhere and contains { gmail, password }
+      console.log(creds)
       const response = await Axios.post(`${BASE}/users/login`, creds);
       console.log(response.data);
       if (response.status === 200) {
@@ -66,7 +67,7 @@ const Login = () => {
             <form onSubmit={userLogin} className="flex flex-col gap-3 mt-5">
               <input
                 onChange={handleChange}
-                name="text"
+                name="gmail"
                 placeholder="Enter username..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required

@@ -1,6 +1,12 @@
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { UserContext } from "@/App";
+import { useContext } from "react";
+import { Logout } from "@/Routes/Navbar/Nav";
+import { buttonVariants } from "./ui/button";
+
 function HeroSection() {
+  const { company } = useContext(UserContext);
   return (
     <section className="w-full lg:px-24  border-b border-border">
       <div className="container py-5">
@@ -16,8 +22,19 @@ function HeroSection() {
             </h2>
             <div className="flex justify-center items-center gap-6 mt-5">
               <Link to="/procedure"><Button>Get Started</Button></Link>
-              <a href="#products" className="transition-all hidden md:flex"><Button variant="outline">Explore Products</Button></a>
-              <Link to="/login" className="md:hidden"><Button variant="outline">Sign in</Button></Link>
+              
+              {company && company.gmail ? (
+                <button
+                  onClick={Logout}
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  Sign out
+                </button>
+              ) : (
+                <Link to="/login">
+                  <Button variant={"outline"}>Sign in</Button>
+                </Link>
+              )}
             </div>
           </div>
           
