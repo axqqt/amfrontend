@@ -23,24 +23,26 @@ export const UserContext = React.createContext();
 
 function App({ location }) {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState(() => {
-    const storedCompany = localStorage.getItem("company");
-    try {
-      // Check if storedCompany is valid JSON before parsing
-      return storedCompany
-        ? JSON.parse(storedCompany)
-        : { gmail: "yes@gmail.com", password: "" };
-    } catch (error) {
-      console.error("Error parsing storedCompany:", error);
-      // If parsing fails, return the default value
-      return { gmail: "", password: "" };
-    }
-  });
+  const [company, setCompany] = useState({});
+
 
   const BASE = "http://localhost:8000";
 
   const [status, setStatus] = useState("");
   location = useLocation();
+
+  useEffect(() => {
+    const storedCompany = localStorage.getItem("company");
+    try {
+      // Check if storedCompany is valid JSON before parsing
+      const parsedCompany = storedCompany ? JSON.parse(storedCompany) : {};
+      setCompany(parsedCompany);
+    } catch (error) {
+      console.error("Error parsing storedCompany:", error);
+      // Handle parsing error, maybe set company to an empty object or log the error
+    }
+  }, []);
+  
 
   useEffect(() => {
     setTimeout(() => {

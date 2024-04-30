@@ -96,8 +96,6 @@ function ProductsSection() {
                         {item.mediaType === "photo" ? (
                           <img
                             src={item.mediaUrl}
-                            height={100}
-                            width={100}
                             alt={`Image of ${item.title}`}
                           ></img>
                         ) : (
@@ -126,10 +124,8 @@ function ProductsSection() {
                             </p>
                           </div>
                         </div>
-                        
                       </div>
                     </Link>
-                    
                   ))
               ) : (
                 <h1>{status}</h1>

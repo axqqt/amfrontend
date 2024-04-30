@@ -45,8 +45,6 @@ const Product = () => {
                 {Data.mediaType === "photo" ? (
                   <img
                     src={Data.mediaUrl}
-                    height={100}
-                    width={100}
                     alt={`Image of ${Data.title}`}
                   ></img>
                 ) : (

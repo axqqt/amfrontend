@@ -15,17 +15,23 @@ const Login = () => {
     try {
       setStatus("");
       setLoading(true);
-      console.log(creds)
+      
+      // Assuming creds is defined somewhere and contains { gmail, password }
       const response = await Axios.post(`${BASE}/users/login`, creds);
+      console.log(response.data);
       if (response.status === 200) {
-        const { token, company } = response.data;
-
+        const { token, user } = response.data;
+  
         // Store JWT in local storage
         localStorage.setItem("token", token);
-        console.log(company);
-        setCompany(company);
-        setStatus(`${company.gmail} Logged in!`);
+  
+        // Assuming setCompany is a state setter function
+        setCompany(user);
+        
+        setStatus(`${user.company.gmail} Logged in!`);
+        
         setTimeout(() => {
+          // Assuming navigator is a function to navigate to a route
           navigator("/");
         }, 1200);
       }
@@ -35,7 +41,6 @@ const Login = () => {
       } else {
         setStatus("Error");
       }
-    
     } finally {
       setLoading(false);
     }
