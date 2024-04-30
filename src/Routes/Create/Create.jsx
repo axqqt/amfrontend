@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
-
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 const Create = () => {
-  const { loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
+  const { loading, setLoading, BASE, status, setStatus } =
+    useContext(UserContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -54,82 +56,101 @@ const Create = () => {
   };
 
   return (
-    <div>
-      <h1>Add Content</h1>
-      <form onSubmit={addContent}>
-        <div className="form-group">
-          <label>Title:</label>
-          <input
-            name="title"
-            type="text"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Enter title"
-            required
-          />
+    <div className="container w-full">
+      <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">Add Content</h1>
+      <form onSubmit={addContent} className="w-full">
+        <div className="grid lg:grid-cols-3  grid-cols-1 gap-6 w-full">
+        
+          <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
+            <h1 className="text-2xl text-primary font-bold">Main Details</h1>
+            <p className="text-muted text-sm">Enter main details here...</p>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Title:</label>
+              <input
+                name="title"
+                type="text"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Enter title"
+                className="p-2 rounded-lg"
+                required
+              />
+            </div>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Description:</label>
+              <textarea
+                name="description"
+                type="text"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Enter description"
+                className="p-2 rounded-lg"
+                required
+              />
+            </div>
+          </div>
+          <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
+            <h1 className="text-2xl text-primary font-bold">Other Details</h1>
+            <p className="text-muted text-sm">Enter other details here...</p>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Category:</label>
+              <select
+                name="category"
+                className="p-2 rounded-lg"
+                value={formData.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="all">All</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="health">Health</option>
+                <option value="travel">Travel</option>
+                <option value="home">Home</option>
+                <option value="outdoors">Outdoors</option>
+              </select>
+            </div>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Commission:</label>
+              <input
+                name="commission"
+                type="text"
+                value={formData.commission}
+                onChange={handleChange}
+                placeholder="Enter Commission"
+                className="p-2 rounded-lg"
+                required
+              />
+            </div>
+          </div>
+          <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
+            <h1 className="text-2xl text-primary font-bold">Media</h1>
+            <p className="text-muted text-sm">Upload media files here...</p>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Video / Photo:</label>
+              <input
+                name="video"
+                type="file"
+                onChange={handleChange}
+                className="text-white p-2 rounded-md"
+                required
+              />
+            </div>
+            <div className="flex flex-col justify-between gap-2 mt-5">
+              <label className="text-white">Link:</label>
+              <input
+                name="link"
+                type="text"
+                value={formData.link}
+                onChange={handleChange}
+                placeholder="Enter Link"
+                className="p-2 rounded-lg"
+                required
+              />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <input
-            name="description"
-            type="text"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter description"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Category:</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            <option value="all">All</option>
-              <option value="electronics">Electronics</option>
-              <option value="fashion">Fashion</option>
-              <option value="health">Health</option>
-              <option value="travel">Travel</option>
-              <option value="home">Home</option>
-              <option value="outdoors">Outdoors</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Video:</label>
-          <input
-            name="video"
-            type="file"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Link:</label>
-          <input
-            name="link"
-            type="text"
-            value={formData.link}
-            onChange={handleChange}
-            placeholder="Enter Link"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Commission:</label>
-          <input
-            name="commission"
-            type="text"
-            value={formData.commission}
-            onChange={handleChange}
-            placeholder="Enter Commission"
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Adding..." : "Add"}
-        </button>
+        <Button className="flex w-full mt-5">Submit</Button>
       </form>
       <h2>{status}</h2>
     </div>
