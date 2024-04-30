@@ -13,6 +13,7 @@ const Searched = () => {
     try {
       setLoading(true);
       const response = await Axios.post(`${BASE}/searchs`, { search: item });
+      console.log(response.data);
       if (response.status === 200) {
         setData(response.data);
       } else if (response.status === 404) {
@@ -30,8 +31,7 @@ const Searched = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Searched</h1>
+    <div style={{color:"wheat",margin:"40px"}}>
       <h2>{item}</h2>
       {loading ? (
         <h1>Loading...</h1>

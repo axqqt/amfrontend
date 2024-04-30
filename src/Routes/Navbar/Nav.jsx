@@ -36,6 +36,9 @@ const Nav = () => {
             <Link to="/register" className="flex w-auto">
               <Button variant={"white"}>Become a member</Button>
             </Link>
+          {company.gmail &&   <Link to="/create" className="flex w-auto">
+              <Button variant={"white"}>Add Listing</Button>
+            </Link>}
             <Link to="/login">
               <Button variant={"outline"}>Sign in</Button>
             </Link>

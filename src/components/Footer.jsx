@@ -20,7 +20,6 @@ function Footer() {
             <div className="flex justify-between items-start gap-6">
                 <div className="flex flex-col justify-between items-start">
                     <h1 className="text-white font-bold mb-5">AFFILIATED</h1>
-                    <a href="#products" className="text-muted mt-2 hover:text-white transition-all">Explore</a>
                     <Link to="/contact" className="text-muted mt-2 hover:text-white transition-all">Contact Us</Link>
                     <Link to="/procedure" className="text-muted mt-2 hover:text-white transition-all">How to get started?</Link>
                     
