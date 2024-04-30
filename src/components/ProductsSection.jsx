@@ -94,7 +94,12 @@ function ProductsSection() {
                         className="flex flex-col justify-between gap-6 items-center border border-border p-5 rounded-xl hover:scale-105 transition-all"
                       >
                         {item.mediaType === "photo" ? (
-                          <img src={item.link} height={100} width={100} alt={`Image of ${item.title}`}></img>
+                          <img
+                            src={item.mediaUrl}
+                            height={100}
+                            width={100}
+                            alt={`Image of ${item.title}`}
+                          ></img>
                         ) : (
                           <video
                             width="320"
@@ -102,7 +107,7 @@ function ProductsSection() {
                             controls
                             className="rounded-xl hover:opacity-70 transition-all "
                           >
-                            <source src={item.link} type="video/mp4" />
+                            <source src={item.mediaUrl} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
                         )}
@@ -121,8 +126,10 @@ function ProductsSection() {
                             </p>
                           </div>
                         </div>
+                        
                       </div>
                     </Link>
+                    
                   ))
               ) : (
                 <h1>{status}</h1>

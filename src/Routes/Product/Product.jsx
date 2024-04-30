@@ -43,7 +43,12 @@ const Product = () => {
             <div className="flex justfiy-center items-center md:w-1/2">
               <div className="">
                 {Data.mediaType === "photo" ? (
-                 <img src={Data.link} height={100} width={100} alt={`Image of ${Data.title}`}></img>
+                  <img
+                    src={Data.mediaUrl}
+                    height={100}
+                    width={100}
+                    alt={`Image of ${Data.title}`}
+                  ></img>
                 ) : (
                   <video
                     className="aspect-auto rounded-lg w-full h-full"
@@ -51,7 +56,7 @@ const Product = () => {
                     height={1280}
                     controls
                   >
-                    <source src={Data.link} type="video/mp4" />
+                    <source src={Data.mediaUrl} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 )}

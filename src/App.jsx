@@ -22,12 +22,14 @@ const ChatBox = React.lazy(() => import("./Routes/ChatBox/ChatBox"));
 export const UserContext = React.createContext();
 
 function App({ location }) {
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [company, setCompany] = useState(() => {
     const storedCompany = localStorage.getItem("company");
     try {
       // Check if storedCompany is valid JSON before parsing
-      return storedCompany ? JSON.parse(storedCompany) : { gmail: "yes@gmail.com", password: "" };
+      return storedCompany
+        ? JSON.parse(storedCompany)
+        : { gmail: "yes@gmail.com", password: "" };
     } catch (error) {
       console.error("Error parsing storedCompany:", error);
       // If parsing fails, return the default value
@@ -35,9 +37,8 @@ function App({ location }) {
     }
   });
 
-  
-  const BASE = "http://localhost:8000"
-  
+  const BASE = "http://localhost:8000";
+
   const [status, setStatus] = useState("");
   location = useLocation();
 
@@ -51,7 +52,7 @@ function App({ location }) {
     localStorage.setItem("company", JSON.stringify(company));
   }, [company]);
 
-  function clearUp(){
+  function clearUp() {
     localStorage.clear();
   }
 
@@ -61,13 +62,15 @@ function App({ location }) {
     }
   }, [location.pathname, setCompany]);
 
-
-
   const theStates = {
-    company, setCompany, status, setStatus,loading,setLoading,BASE
-  }
-
-
+    company,
+    setCompany,
+    status,
+    setStatus,
+    loading,
+    setLoading,
+    BASE,
+  };
 
   return (
     <section className="bg-black flex flex-col justify-center items-center w-full">
@@ -84,11 +87,8 @@ function App({ location }) {
             <Route path="/procedure" element={<Procedure />} />
             <Route path="/product/:id" element={<Product />} />
             {/* {company && company.gmail && <Route path="/create" element={<Create />} />} */}
-
-            <Route path="/create" element={<Create />}/>
             <Route path="/create" element={<Create />} />
           </Routes>
-        
         </Suspense>
       </UserContext.Provider>
       <Footer />
