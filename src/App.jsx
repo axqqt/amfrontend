@@ -7,6 +7,7 @@ import Procedure from "./Routes/Procedure/Procedure";
 import Footer from "./components/Footer";
 import Searched from "./Routes/Searched/Searched";
 import FeedbackSection from "./components/FeedbackSection";
+import SeeMore from "./Routes/Home/SeeMore/SeeMore";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -82,6 +83,7 @@ function App({ location }) {
           <Search />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/more" element={<SeeMore />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} /> {/**Buggy */}

@@ -33,6 +33,9 @@ const Nav = () => {
             >
               How to get started?
             </Link>
+           {company.length &&  <Link to="/create" className="flex w-auto">
+              <Button variant={"white"}>Add Listing</Button>
+            </Link>}
             <Link to="/register" className="flex w-auto">
               <Button variant={"white"}>Become a member</Button>
             </Link>

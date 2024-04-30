@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { UserContext } from "@/App";
 
 function ProductsSection() {
-  const { company, loading, setLoading, BASE, status, setStatus } =
-    useContext(UserContext);
+  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
+  const [visibleCards, setVisibleCards] = useState(12); // Initially show 12 cards
+  const navigate = useNavigate();
 
   async function fetchContent() {
     try {
@@ -38,11 +38,12 @@ function ProductsSection() {
     setSelectedType(e.target.value);
   };
 
+  const handleSeeMore = () => {
+    navigate("/more");
+  };
+
   return (
-    <section
-      className="lg:px-24 py-12 justify-center items-start"
-      id="products"
-    >
+    <section className="lg:px-24 py-12 justify-center items-start" id="products">
       <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
@@ -52,7 +53,7 @@ function ProductsSection() {
               className="p-2 rounded-lg"
               onChange={handleTypeChange}
             >
-              <option value="all">All</option>
+          <option value="all">All</option>
               <option value="electronics">Electronics</option>
               <option value="fashion">Fashion</option>
               <option value="health">Health</option>
@@ -61,7 +62,6 @@ function ProductsSection() {
               <option value="outdoors">Outdoors</option>
             </select>
           </div>
-
           <div className="flex justify-between items-center md:hidden">
             <select
               value={selectedType}
@@ -87,6 +87,7 @@ function ProductsSection() {
                     (item) =>
                       selectedType === "all" || item.category === selectedType
                   )
+                  .slice(0, visibleCards) // Limit to visibleCards
                   .map((item) => (
                     <Link to={`/product/${item._id}`} key={item._id}>
                       <div
@@ -114,7 +115,7 @@ function ProductsSection() {
                           <div>
                             <h1 className="text-white">{item.title}</h1>
                             <h3 className="text-muted mt-3 ">
-                              {item.commission}% /sale
+                              Commission : {item.commission}
                             </h3>
                           </div>
 
@@ -133,6 +134,14 @@ function ProductsSection() {
             </>
           )}
         </div>
+        {/* Render See More button if there are more cards to display */}
+        {data.length > visibleCards && (
+          <div className="flex justify-center mt-4">
+            <button className="btn" onClick={handleSeeMore} style={{color:"wheat",borderRadius:"12px",borderColor:"purple"}}>
+              See More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

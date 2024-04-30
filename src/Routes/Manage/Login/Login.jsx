@@ -66,8 +66,8 @@ const Login = () => {
             <form onSubmit={userLogin} className="flex flex-col gap-3 mt-5">
               <input
                 onChange={handleChange}
-                name="gmail"
-                placeholder="Enter email..."
+                name="text"
+                placeholder="Enter username..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
