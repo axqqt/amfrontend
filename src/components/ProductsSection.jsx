@@ -52,9 +52,12 @@ function ProductsSection() {
               onChange={handleTypeChange}
             >
               <option value="all">All</option>
-              <option value="clothing">Clothing</option>
-              <option value="health">Health Care</option>
-              <option value="beauty">Beauty</option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="health">Health</option>
+              <option value="travel">Travel</option>
+              <option value="home">Home</option>
+              <option value="outdoors">Outdoors</option>
             </select>
           </div>
 
@@ -71,7 +74,6 @@ function ProductsSection() {
             </select>
           </div>
         </div>
-        
 
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5">
           {loading ? (
@@ -116,7 +118,12 @@ function ProductsSection() {
                           className="rounded-xl hover:opacity-70 transition-all "
                         /> */}
 
-                        <video width="320" height="240" controls className="rounded-xl hover:opacity-70 transition-all ">
+                        <video
+                          width="320"
+                          height="240"
+                          controls
+                          className="rounded-xl hover:opacity-70 transition-all "
+                        >
                           <source src={item.link} type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>

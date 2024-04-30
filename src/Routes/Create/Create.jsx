@@ -87,10 +87,13 @@ const Create = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select category</option>
-            <option value="clothing">Clothing</option>
-            <option value="health">Health Care</option>
-            <option value="beauty">Beauty</option>
+            <option value="all">All</option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="health">Health</option>
+              <option value="travel">Travel</option>
+              <option value="home">Home</option>
+              <option value="outdoors">Outdoors</option>
           </select>
         </div>
         <div className="form-group">
