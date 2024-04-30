@@ -88,7 +88,7 @@ function App({ location }) {
             <Route path="/create" element={<Create />}/>
             <Route path="/create" element={<Create />} />
           </Routes>
-          <FeedbackSection />
+        
         </Suspense>
       </UserContext.Provider>
       <Footer />

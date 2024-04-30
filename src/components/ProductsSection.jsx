@@ -93,15 +93,19 @@ function ProductsSection() {
                         key={item._id}
                         className="flex flex-col justify-between gap-6 items-center border border-border p-5 rounded-xl hover:scale-105 transition-all"
                       >
-                        <video
-                          width="320"
-                          height="240"
-                          controls
-                          className="rounded-xl hover:opacity-70 transition-all "
-                        >
-                          <source src={item.link} type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
+                        {item.mediaType === "photo" ? (
+                          <img src={item.link} height={100} width={100} alt={`Image of ${item.title}`}></img>
+                        ) : (
+                          <video
+                            width="320"
+                            height="240"
+                            controls
+                            className="rounded-xl hover:opacity-70 transition-all "
+                          >
+                            <source src={item.link} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        )}
 
                         <div className="flex justify-between items-center w-full">
                           <div>
