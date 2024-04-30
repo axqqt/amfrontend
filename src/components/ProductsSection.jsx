@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Search from "@/Routes/Search/Search";
 import Axios from "axios";
 import { UserContext } from "@/App";
 
@@ -23,6 +23,7 @@ function ProductsSection() {
       }
     } catch (err) {
       console.error(err);
+      setStatus("Error!");
     } finally {
       setLoading(false);
     }
@@ -80,7 +81,7 @@ function ProductsSection() {
             <div>Loading...</div>
           ) : (
             <>
-              {data && data.length > 0 ? (
+              {Array.isArray(data) && data.length > 0 ? (
                 data
                   .filter(
                     (item) =>
@@ -92,32 +93,6 @@ function ProductsSection() {
                         key={item._id}
                         className="flex flex-col justify-between gap-6 items-center border border-border p-5 rounded-xl hover:scale-105 transition-all"
                       >
-                        {/* <h1 className="text-white">{item.title}</h1>
-                    <h2 className="text-muted">{item.description}</h2>
-                    <h3 className="text-muted">
-                      Commission rate: {item.commission}
-                    </h3>
-                    <div className="">
-                      <video width="320" height="240" controls>
-                        <source src={item.video.link} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                      <div className="timestamps">
-                        <h1>{item.timstamps}</h1>
-                      </div>
-                    </div>
-                    {item.video.link && (
-                      <Link to={item.video.link}>
-                        {`Click here to get started with ${item.title}`}
-                      </Link>
-                    )} */}
-                        {/* <img
-                          src="/productImage.webp"
-                          alt="product"
-                          width={"full"}
-                          className="rounded-xl hover:opacity-70 transition-all "
-                        /> */}
-
                         <video
                           width="320"
                           height="240"
@@ -146,11 +121,10 @@ function ProductsSection() {
                     </Link>
                   ))
               ) : (
-                <h1>No results found</h1>
+                <h1>{status}</h1>
               )}
             </>
           )}
-          <h2>{status}</h2>
         </div>
       </div>
     </section>

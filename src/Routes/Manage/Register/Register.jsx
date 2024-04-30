@@ -25,7 +25,7 @@ const Register = () => {
       }
     } catch (err) {
       if (err.response && err.response.status === 409) {
-        setStatus(`${gmail} is already taken!`);
+        setStatus(`${user.gmail} is already taken!`);
       } else {
         setStatus("Error occurred during registration");
       }

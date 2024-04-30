@@ -27,13 +27,16 @@ function App({ location }) {
     const storedCompany = localStorage.getItem("company");
     try {
       // Check if storedCompany is valid JSON before parsing
-      return storedCompany ? JSON.parse(storedCompany) : { gmail: "", password: "" };
+      return storedCompany ? JSON.parse(storedCompany) : { gmail: "yes@gmail.com", password: "" };
     } catch (error) {
       console.error("Error parsing storedCompany:", error);
       // If parsing fails, return the default value
       return { gmail: "", password: "" };
     }
   });
+
+  
+  const BASE = "http://localhost:8000"
   
   const [status, setStatus] = useState("");
   location = useLocation();
@@ -61,7 +64,7 @@ function App({ location }) {
 
 
   const theStates = {
-    company, setCompany, status, setStatus,loading,setLoading
+    company, setCompany, status, setStatus,loading,setLoading,BASE
   }
 
 
@@ -80,8 +83,10 @@ function App({ location }) {
             <Route path="/search/:item" element={<Searched />} />
             <Route path="/procedure" element={<Procedure />} />
             <Route path="/product/:id" element={<Product />} />
-            {company && company.gmail && <Route path="/create" element={<Create />} />}
-            <Route path="*" element={<NotFound />} />
+            {/* {company && company.gmail && <Route path="/create" element={<Create />} />} */}
+
+            <Route path="/create" element={<Create />}/>
+            <Route path="/create" element={<Create />} />
           </Routes>
           <FeedbackSection />
         </Suspense>
