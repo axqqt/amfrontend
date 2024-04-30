@@ -32,7 +32,7 @@ function FeedbackSection() {
     <section className="w-full  mt-5 py-5  " id="feedback">
       <div className="container w-full flex justify-between">
         <div className="flex flex-col md:flex-row justify-around items-center w-full">
-          <div className="w-full lg:p-24 xl:p-0 xl:w-auto">
+          <div className="w-full lg:p-24 xl:p-0 xl:w-1/2">
             <h1 className="md:text-5xl text-3xl text-white font-bold mb-5 text-start">
               Leave a Feedback
             </h1>

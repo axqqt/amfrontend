@@ -23,7 +23,7 @@ function HeroSection() {
             <div className="flex justify-center items-center gap-6 mt-5">
               <Link to="/procedure"><Button>Get Started</Button></Link>
                
-              {company && company.gmail ? (
+              {/* {company && company.gmail ? (
                 <button
                   onClick={Logout}
                   className={buttonVariants({ variant: "outline" })}
@@ -34,7 +34,7 @@ function HeroSection() {
                 <Link to="/login">
                   <Button variant={"outline"}>Sign in</Button>
                 </Link>
-              )}
+              )} */}
             </div>
           </div>
           
