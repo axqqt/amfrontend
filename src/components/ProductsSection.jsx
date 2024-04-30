@@ -137,7 +137,7 @@ function ProductsSection() {
         {/* Render See More button if there are more cards to display */}
         {data.length > visibleCards && (
           <div className="flex justify-center mt-4">
-            <button className="btn" onClick={handleSeeMore} style={{color:"wheat",borderRadius:"12px",borderColor:"purple"}}>
+            <button className="text-white hover:text-muted transition-all" onClick={handleSeeMore} >
               See More
             </button>
           </div>

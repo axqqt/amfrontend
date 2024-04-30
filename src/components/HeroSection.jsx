@@ -22,7 +22,7 @@ function HeroSection() {
             </h2>
             <div className="flex justify-center items-center gap-6 mt-5">
               <Link to="/procedure"><Button>Get Started</Button></Link>
-              
+               
               {company && company.gmail ? (
                 <button
                   onClick={Logout}

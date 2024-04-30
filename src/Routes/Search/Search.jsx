@@ -22,27 +22,29 @@ const Search = () => {
   }
 
   return (
-    <div className="px-12 w-full">
-      <div className="flex justify-start items-start">
-        <form onSubmit={Search} className="flex justify-start w-full  gap-3">
-          <input
-            style={{ color: "white" }}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-            className="p-2 rounded-lg bg-slate-900 border border-border w-full"
-            placeholder="Search Products..."
-            type="text"
-          ></input>
-          <Button type="submit" disabled={loading}>
-            <img
-              width="15"
-              height="15"
-              src="https://img.icons8.com/ios-glyphs/30/FFFFFF/search--v1.png"
-              alt="search--v1"
-            />
-          </Button>
-        </form>
+    <div className="px-24 w-full">
+      <div className="container">
+        <div className="flex justify-start items-start">
+          <form onSubmit={Search} className="flex justify-start w-full  gap-3">
+            <input
+              style={{ color: "white" }}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              className="p-2 rounded-lg bg-slate-900 border border-border w-full"
+              placeholder="Search Products..."
+              type="text"
+            ></input>
+            <Button type="submit" disabled={loading}>
+              <img
+                width="15"
+                height="15"
+                src="https://img.icons8.com/ios-glyphs/30/FFFFFF/search--v1.png"
+                alt="search--v1"
+              />
+            </Button>
+          </form>
+        </div>
       </div>
     </div>
   );
