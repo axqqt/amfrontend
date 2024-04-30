@@ -14,7 +14,7 @@ const Home = React.lazy(() => import("./Routes/Home/Home"));
 const Register = React.lazy(() => import("./Routes/Manage/Register/Register"));
 const Login = React.lazy(() => import("./Routes/Manage/Login/Login"));
 const Nav = React.lazy(() => import("./Routes/Navbar/Nav"));
-const BottomNav = React.lazy(() => import("./Routes/BottomNav/BottomNav"))
+
 const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
 const Product = React.lazy(() => import("./Routes/Product/Product"));
@@ -71,7 +71,7 @@ function App({location}) {
          
           <Suspense fallback={<div>Loading...</div>}>
             <Nav />
-            <ChatBox />
+            {/* <ChatBox /> */}
             {/* <Search /> */}
             <Routes>
               <Route path="/" element={<Home />} />

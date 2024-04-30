@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import { Button } from "@/components/ui/button";
+
 const Login = () => {
   const { loading, setLoading, status, setStatus, BASE, setCompany } =
     useContext(UserContext);
@@ -14,6 +15,7 @@ const Login = () => {
     try {
       setStatus("");
       setLoading(true);
+      console.log(creds)
       const response = await Axios.post(`${BASE}/users/login`, creds);
       if (response.status === 200) {
         const { token, company } = response.data;
@@ -44,9 +46,9 @@ const Login = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-screen md:w-full  lg:p-24">
+    <section className="flex items-center justify-center h-screen md:w-full lg:w-auto  lg:p-24">
       <div className="container ">
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col justify-center items-center h-full border border-border p-10 rounded-xl">
           <div className="w-full">
             <h1 className="text-5xl text-white text-start font-bold mb-3">
               Login
@@ -80,7 +82,7 @@ const Login = () => {
               <h1 className="text-gray-600">{status}</h1>
               <Link to="/register" className="text-blue-500 hover:underline">
                 {" "}
-                Already have an account?
+                Not registered?
               </Link>
             </div>
           </div>

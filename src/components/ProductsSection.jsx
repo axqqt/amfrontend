@@ -92,7 +92,7 @@ function ProductsSection() {
                     <Link to={`/product/${item._id}`} key={item._id}>
                       <div
                         key={item._id}
-                        className="flex flex-col justify-between gap-6 items-center"
+                        className="flex flex-col justify-between gap-6 items-center border border-border p-5 rounded-xl hover:scale-105 transition-all"
                       >
                         {/* <h1 className="text-white">{item.title}</h1>
                     <h2 className="text-muted">{item.description}</h2>
@@ -117,24 +117,25 @@ function ProductsSection() {
                           src="/productImage.webp"
                           alt="product"
                           width={"full"}
-                          className="rounded-xl hover:opacity-70 transition-all hover:scale-105"
+                          className="rounded-xl hover:opacity-70 transition-all "
                         />
 
                         <div className="flex justify-between items-center w-full">
                           <div>
-                            <h1 className="text-white font-bold">
+                            <h1 className="text-white">
                               {item.title}
                             </h1>
+                            <h3 className="text-muted mt-3 ">
+                             
+                             {item.commission}% /sale
+                            </h3>
                           </div>
 
                           <div className="flex flex-col justify-between items-end">
                             <p className="text-white p-1 bg-primary-foreground rounded-xl text-xs px-2">
                               category
                             </p>
-                            <h3 className="text-white mt-3">
-                              {/* {item.commission} */}
-                              commision: {item.commission}%/Sale
-                            </h3>
+                           
                           </div>
                         </div>
                       </div>
