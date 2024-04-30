@@ -22,7 +22,7 @@ const Login = () => {
 
         // Store JWT in local storage
         localStorage.setItem("token", token);
-
+        console.log(company);
         setCompany(company);
         setStatus(`${company.gmail} Logged in!`);
         setTimeout(() => {
@@ -35,7 +35,7 @@ const Login = () => {
       } else {
         setStatus("Error");
       }
-      console.error(err);
+    
     } finally {
       setLoading(false);
     }
