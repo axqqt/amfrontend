@@ -51,7 +51,9 @@ function FeedbackSection() {
           <h3 className="text-muted text-center text-xl mt-5 mb-5 md:hidden flex">
           Don't Worry It's Completely Anonymous :)
         </h3>
+        <h2 style={{color:"white",margin:"40px"}}>{status}</h2>
         </div>
+        
     </section>
   );
 }

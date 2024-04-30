@@ -44,7 +44,7 @@ const Home = () => {
       
         <HeroSection />
         <ProductsSection />
-     
+        <FeedbackSection />
       
 
 

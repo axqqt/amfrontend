@@ -26,6 +26,7 @@ const Search = () => {
       <div className="flex justify-center items-start">
         <form onSubmit={Search} className="flex justify-start w-full  gap-3">
           <input
+          style={{color:"white"}}
             onChange={(e) => {
               setSearch(e.target.value);
             }}

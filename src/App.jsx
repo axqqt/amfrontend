@@ -22,24 +22,27 @@ const ChatBox = React.lazy(() => import("./Routes/ChatBox/ChatBox"));
 export const UserContext = React.createContext();
 
 function App({ location }) {
-  const [loading,setLoading] = useState(false);
-  const [company, setCompany] = useState(() => {
+  const [loading, setLoading] = useState(false);
+  const [company, setCompany] = useState({});
+
+
+  const BASE = "http://localhost:8000";
+
+  const [status, setStatus] = useState("");
+  location = useLocation();
+
+  useEffect(() => {
     const storedCompany = localStorage.getItem("company");
     try {
       // Check if storedCompany is valid JSON before parsing
-      return storedCompany ? JSON.parse(storedCompany) : { gmail: "yes@gmail.com", password: "" };
+      const parsedCompany = storedCompany ? JSON.parse(storedCompany) : {};
+      setCompany(parsedCompany);
     } catch (error) {
       console.error("Error parsing storedCompany:", error);
-      // If parsing fails, return the default value
-      return { gmail: "", password: "" };
+      // Handle parsing error, maybe set company to an empty object or log the error
     }
-  });
-
+  }, []);
   
-  const BASE = "http://localhost:8000"
-  
-  const [status, setStatus] = useState("");
-  location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -51,7 +54,7 @@ function App({ location }) {
     localStorage.setItem("company", JSON.stringify(company));
   }, [company]);
 
-  function clearUp(){
+  function clearUp() {
     localStorage.clear();
   }
 
@@ -61,13 +64,15 @@ function App({ location }) {
     }
   }, [location.pathname, setCompany]);
 
-
-
   const theStates = {
-    company, setCompany, status, setStatus,loading,setLoading,BASE
-  }
-
-
+    company,
+    setCompany,
+    status,
+    setStatus,
+    loading,
+    setLoading,
+    BASE,
+  };
 
   return (
     <section className="bg-black flex flex-col justify-center items-center w-full">
@@ -79,16 +84,13 @@ function App({ location }) {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             <Route path="/procedure" element={<Procedure />} />
             <Route path="/product/:id" element={<Product />} />
             {/* {company && company.gmail && <Route path="/create" element={<Create />} />} */}
-
-            <Route path="/create" element={<Create />}/>
             <Route path="/create" element={<Create />} />
           </Routes>
-          <FeedbackSection />
         </Suspense>
       </UserContext.Provider>
       <Footer />
