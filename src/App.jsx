@@ -15,7 +15,6 @@ const Home = React.lazy(() => import("./Routes/Home/Home"));
 const Register = React.lazy(() => import("./Routes/Manage/Register/Register"));
 const Login = React.lazy(() => import("./Routes/Manage/Login/Login"));
 const Nav = React.lazy(() => import("./Routes/Navbar/Nav"));
-
 const Create = React.lazy(() => import("./Routes/Create/Create"));
 const Search = React.lazy(() => import("./Routes/Search/Search"));
 const Product = React.lazy(() => import("./Routes/Product/Product"));
@@ -79,7 +78,6 @@ function App({location}) {
        
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/contact" element={<Contact />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/search/:item" element={<Searched/>}></Route>

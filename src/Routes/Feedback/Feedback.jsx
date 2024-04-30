@@ -14,7 +14,7 @@ const Feedback = () => {
         if (response.status === 201) {
           setTimeout(() => {
             setStatus("Thank you for your feedback");
-          }, 2000);
+          }, 2400);
         } else if (response.status === 403) {
           setStatus("Error while adding your status!");
         }
@@ -43,7 +43,7 @@ const Feedback = () => {
           Submit
         </button>
       </form>
-      <h3>{status}</h3>
+      <p style={{color:"white"}}>{status}</p>
       <a href="#top" >Back to the top</a>
     </div>
   );

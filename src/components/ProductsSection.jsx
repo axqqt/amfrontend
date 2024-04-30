@@ -46,8 +46,6 @@ function ProductsSection() {
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
           <div className="md:flex justify-between items-center hidden">
-        
-
             <select
               value={selectedType}
               className="p-2 rounded-lg"
@@ -73,9 +71,7 @@ function ProductsSection() {
             </select>
           </div>
         </div>
-          <div className="w-full md:hidden">
-            <Search />
-          </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5">
           {loading ? (
@@ -113,21 +109,23 @@ function ProductsSection() {
                         {`Click here to get started with ${item.title}`}
                       </Link>
                     )} */}
-                        <img
+                        {/* <img
                           src="/productImage.webp"
                           alt="product"
                           width={"full"}
                           className="rounded-xl hover:opacity-70 transition-all "
-                        />
+                        /> */}
+
+                        <video width="320" height="240" controls className="rounded-xl hover:opacity-70 transition-all ">
+                          <source src={item.link} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
 
                         <div className="flex justify-between items-center w-full">
                           <div>
-                            <h1 className="text-white">
-                              {item.title}
-                            </h1>
+                            <h1 className="text-white">{item.title}</h1>
                             <h3 className="text-muted mt-3 ">
-                             
-                             {item.commission}% /sale
+                              {item.commission}% /sale
                             </h3>
                           </div>
 
@@ -135,7 +133,6 @@ function ProductsSection() {
                             <p className="text-white p-1 bg-primary-foreground rounded-xl text-xs px-2">
                               category
                             </p>
-                           
                           </div>
                         </div>
                       </div>
