@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 const Searched = () => {
-  const { loading, setLoading, status, setStatus, BASE } = useContext(UserContext);
+  const { loading, setLoading, status, setStatus, BASE } =
+    useContext(UserContext);
   const { item } = useParams();
   const [data, setData] = useState([]);
 
@@ -31,8 +32,7 @@ const Searched = () => {
   }, []);
 
   return (
-    <div style={{color:"wheat",margin:"40px"}}>
-      <h2>{item}</h2>
+    <div style={{ color: "wheat", margin: "40px" }}>
       {loading ? (
         <h1>Loading...</h1>
       ) : (

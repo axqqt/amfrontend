@@ -82,7 +82,7 @@ function App({ location }) {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             <Route path="/procedure" element={<Procedure />} />
             <Route path="/product/:id" element={<Product />} />
