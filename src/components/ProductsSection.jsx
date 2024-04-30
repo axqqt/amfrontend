@@ -120,7 +120,7 @@ function ProductsSection() {
 
                           <div className="flex flex-col justify-between items-end">
                             <p className="text-white p-1 bg-primary-foreground rounded-xl text-xs px-2">
-                              category
+                              {item.category}
                             </p>
                           </div>
                         </div>

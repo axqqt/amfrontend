@@ -3,9 +3,9 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+
 const Create = () => {
-  const { loading, setLoading, BASE, status, setStatus } =
+  const { loading, setLoading, BASE, status, setStatus, company } =
     useContext(UserContext);
   const [formData, setFormData] = useState({
     title: "",
@@ -13,7 +13,7 @@ const Create = () => {
     video: null,
     link: "",
     category: "",
-    commission: "", // Adding commission field
+    commission: "",
   });
 
   const navigator = useNavigate();
@@ -25,11 +25,13 @@ const Create = () => {
       const formDataToSend = new FormData();
       formDataToSend.append("title", formData.title);
       formDataToSend.append("description", formData.description);
-      formDataToSend.append("video", formData.video);
       formDataToSend.append("link", formData.link);
       formDataToSend.append("category", formData.category);
       formDataToSend.append("commission", formData.commission);
-      const response = await Axios.post(`${BASE}/mains`, formDataToSend);
+      formDataToSend.append("userId", company._id); // Add userId
+      formDataToSend.append("media", formData.video); // Change 'video' to 'media'
+      console.log(formData.title, formData.description, formData.link, formData.category, formData.commission, company._id)
+      const response = await Axios.post(`${BASE}/`, formDataToSend); // Send to root route
       if (response.status === 201) {
         setStatus("Content Added");
         setFormData({
@@ -57,10 +59,11 @@ const Create = () => {
 
   return (
     <div className="container w-full">
-      <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">Add Content</h1>
+      <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">
+        Add Content
+      </h1>
       <form onSubmit={addContent} className="w-full">
         <div className="grid lg:grid-cols-3  grid-cols-1 gap-6 w-full">
-        
           <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
             <h1 className="text-2xl text-primary font-bold">Main Details</h1>
             <p className="text-muted text-sm">Enter main details here...</p>
