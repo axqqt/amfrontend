@@ -46,7 +46,7 @@ function ProductsSection() {
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
           <div className="md:flex justify-between items-center hidden">
-            <Search />
+        
 
             <select
               value={selectedType}
@@ -146,6 +146,7 @@ function ProductsSection() {
               )}
             </>
           )}
+          <h2>{status}</h2>
         </div>
       </div>
     </section>

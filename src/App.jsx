@@ -8,6 +8,7 @@ import NotFound from "./Routes/NotFound/NotFound";
 import Procedure from "./Routes/Procedure/Procedure";
 import Footer from "./components/Footer";
 import Searched from "./Routes/Searched/Searched";
+import FeedbackSection from "./components/FeedbackSection";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -73,7 +74,9 @@ function App({location}) {
             <Nav />
             {/* <ChatBox /> */}
             {/* <Search /> */}
+            <Search />
             <Routes>
+       
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/contact" element={<Contact />} />
@@ -88,7 +91,7 @@ function App({location}) {
               <Route path="*" element={<NotFound />} />
             </Routes>
             
-          
+            <FeedbackSection />
           </Suspense>
         </UserContext.Provider>
      <Footer/>
