@@ -77,11 +77,11 @@ function App({ location }) {
   };
 
   return (
-    <section className="bg-black flex flex-col justify-center items-center w-full">
+    <section className="bg-black flex flex-col justify-center items-center h-full w-full">
       <UserContext.Provider value={theStates}>
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
-          <Search />
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/more" element={<SeeMore />} />

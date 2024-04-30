@@ -65,13 +65,13 @@ const Create = () => {
   };
 
   return (
-    <section className="flex flex-col justify-between items-center w-full p-24 h-screen">
+    <section className="flex flex-col justify-between items-center w-full lg:p-24 h-full">
       <div className="container">
         <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">
           Add Listing
         </h1>
         <form onSubmit={addContent} className="w-full">
-          <div className="grid lg:grid-cols-3  grid-cols-1 gap-6 w-full">
+          <div className="grid lg:grid-cols-2  grid-cols-1 gap-6 w-full">
             <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
               <h1 className="text-2xl text-primary font-bold">Main Details</h1>
               <p className="text-muted text-sm">Enter main details here...</p>
@@ -134,7 +134,7 @@ const Create = () => {
                 />
               </div>
             </div>
-            <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
+            <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between w-full md:col-span-2">
               <h1 className="text-2xl text-primary font-bold">Media</h1>
               <p className="text-muted text-sm">Upload media files here...</p>
               <div className="flex flex-col justify-between gap-2 mt-5">

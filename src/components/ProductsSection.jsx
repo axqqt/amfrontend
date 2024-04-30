@@ -43,17 +43,17 @@ function ProductsSection() {
   };
 
   return (
-    <section className="lg:px-24 py-12 justify-center items-start" id="products">
+    <section className="lg:px-24 py-12 flex justify-center items-start" id="products">
       <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
           <div className="md:flex justify-between items-center hidden">
             <select
               value={selectedType}
-              className="p-2 rounded-lg"
+              className="p-2 rounded-lg bg-slate-900 border border-border text-white"
               onChange={handleTypeChange}
             >
-          <option value="all">All</option>
+          <option  value="all">All</option>
               <option value="electronics">Electronics</option>
               <option value="fashion">Fashion</option>
               <option value="health">Health</option>
@@ -113,9 +113,9 @@ function ProductsSection() {
 
                         <div className="flex justify-between items-center w-full">
                           <div>
-                            <h1 className="text-white">{item.title}</h1>
-                            <h3 className="text-muted mt-3 ">
-                              Commission : {item.commission}
+                            <h1 className="text-white font-bold text-lg">{item.title}</h1>
+                            <h3 className="text-muted mt-3 text-sm">
+                              Commission: {item.commission}% / sale
                             </h3>
                           </div>
 

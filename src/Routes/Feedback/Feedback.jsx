@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Axios from "axios";
+import { Textarea } from "@/components/ui/textarea";
 
 const Feedback = () => {
   const [feedback, setMsg] = useState("");
@@ -32,13 +33,14 @@ const Feedback = () => {
       <h2>We would really appreciate your feedback for improvement!</h2>
       <h3>Do NOT worry , its completely anonymous!</h3>
       <form onSubmit={AddFeedback}>
-        <input
+        <Textarea
           onChange={(e) => {
             setMsg(e.target.value);
           }}
           min={5}
+          
           placeholder="Your valuable feedback"
-        ></input>
+        ></Textarea>
         <button type="submit" disabled={loading}>
           Submit
         </button>

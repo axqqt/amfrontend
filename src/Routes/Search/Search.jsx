@@ -22,7 +22,7 @@ const Search = () => {
   }
 
   return (
-    <div className="px-24 w-full">
+    <div className="lg:px-24 w-full">
       <div className="container">
         <div className="flex justify-start items-start">
           <form onSubmit={Search} className="flex justify-start w-full  gap-3">

@@ -1,14 +1,15 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import Search from "../Search/Search";
 import { UserContext } from "../../App";
-import "./Home.css";
 import HeroSection from "@/components/HeroSection";
 import ProductsSection from "@/components/ProductsSection";
 import FeedbackSection from "@/components/FeedbackSection";
 
 const Home = () => {
-  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
+  const { company, loading, setLoading, BASE, status, setStatus } =
+    useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
 
@@ -41,13 +42,10 @@ const Home = () => {
 
   return (
     <section className="h-full w-full">
-      
-        <HeroSection />
-        <ProductsSection />
-        <FeedbackSection />
-      
-
-
+      <Search />
+      <HeroSection />
+      <ProductsSection />
+      <FeedbackSection />
     </section>
   );
 };
