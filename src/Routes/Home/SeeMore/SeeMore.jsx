@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { UserContext } from "../../../App";
 
 import FeedbackSection from "@/components/FeedbackSection";
+import { Search } from "lucide-react";
 
 const SeeMore = () => {
   const { loading, setLoading, BASE, setStatus } = useContext(UserContext);
@@ -39,6 +41,7 @@ const SeeMore = () => {
 
   return (
     <section className="h-full w-full">
+      <Search />
       <div className="container">
         <section
           className="lg:px-24 py-12 justify-center items-start"
