@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import Axios from "axios";
@@ -12,6 +13,7 @@ const Product = () => {
     useContext(UserContext);
   const { id } = useParams();
   const [Data, setData] = useState([]);
+  const [affiliateMenu, setAffiliateMenu] = useState(false);
 
   async function fetchItem() {
     try {
@@ -33,6 +35,24 @@ const Product = () => {
     fetchItem();
   }, [id]);
 
+  async function openAffiliate() {
+    setAffiliateMenu(!affiliateMenu);
+    try {
+      const response = await Axios.post(`${BASE}/affiliates`, {
+        productId: id,
+        affiliateId: "testing",
+      });
+      if(response.status===200){
+      setStatus("Got data!")
+      }
+    } catch (err) {
+      console.error(err);
+      if(err.status===404){
+        setStatus("Not found!")
+      }
+    }
+  }
+
   return (
     <section className="h-full flex w-full md:p-24">
       {loading ? (
@@ -43,10 +63,7 @@ const Product = () => {
             <div className="flex justfiy-center items-center md:w-1/2">
               <div className="">
                 {Data.mediaType === "photo" ? (
-                  <img
-                    src={Data.mediaUrl}
-                    alt={`Image of ${Data.title}`}
-                  ></img>
+                  <img src={Data.mediaUrl} alt={`Image of ${Data.title}`}></img>
                 ) : (
                   <video
                     className="aspect-auto rounded-lg w-full h-full"
@@ -63,6 +80,21 @@ const Product = () => {
                 </div> */}
               </div>
             </div>
+            <button
+              className="get-link"
+              style={{ color: "white" }}
+              onClick={openAffiliate}
+            >
+              Get Affiliate Link
+            </button>
+            {affiliateMenu && (
+              <div className="affiliates" style={{ color: "white" }}>
+                <div className="container">
+                  <h1>Hello</h1>
+                  <h2>{status}</h2>
+                </div>
+              </div>
+            )}
             <div className="md:w-1/2 flex flex-col justify-between items-start gap-6 w-full">
               <div className="p-10 rounded-xl border border-border w-full">
                 <Badge>{Data.category}</Badge>
