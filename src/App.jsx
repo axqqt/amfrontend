@@ -9,6 +9,7 @@ import Searched from "./Routes/Searched/Searched";
 import FeedbackSection from "./components/FeedbackSection";
 import SeeMore from "./Routes/Home/SeeMore/SeeMore";
 import Affiliates from "./Routes/Affiliates/Affiliates";
+import Social from "./Routes/Social/Social";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -85,6 +86,7 @@ function App({ location }) {
           <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="social" element={<Social/>}></Route>
             <Route path="/more" element={<SeeMore />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
