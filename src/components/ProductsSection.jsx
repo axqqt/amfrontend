@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
@@ -44,6 +45,7 @@ function ProductsSection() {
 
   return (
     <section className="lg:px-24 py-12 flex justify-center items-start" id="products">
+      {loading && <h1 style={{color:"white"}}>Loading...</h1>}
       <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>

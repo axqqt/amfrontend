@@ -1,9 +1,19 @@
+/* eslint-disable no-empty-pattern */
+import { UserContext } from "@/App";
+import { useContext } from "react";
 
-
+/* eslint-disable no-unused-vars */
 const Affiliates = () => {
-  return (
-    <div><h1>Affiliates</h1><div className="container"></div></div>
-  )
-}
+  const {} = useContext(UserContext);
 
-export default Affiliates
+  async function Affiliates() {}
+
+  return (
+    <div>
+      <h1>Affiliates</h1>
+      <div className="container"></div>
+    </div>
+  );
+};
+
+export default Affiliates;

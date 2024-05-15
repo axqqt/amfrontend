@@ -27,6 +27,7 @@ export const UserContext = React.createContext();
 function App({ location }) {
   const [loading, setLoading] = useState(false);
   const [company, setCompany] = useState({});
+  const [affiliate, setAffiliate] = useState(true);
 
   const BASE = "http://localhost:8000";
 
@@ -73,6 +74,8 @@ function App({ location }) {
     loading,
     setLoading,
     BASE,
+    affiliate,
+    setAffiliate,
   };
 
   return (

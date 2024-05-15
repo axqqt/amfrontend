@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -66,6 +67,7 @@ const Create = () => {
 
   return (
     <section className="flex flex-col justify-between items-center w-full lg:p-24 h-full">
+      {loading && <h1>Loading...</h1>}
       <div className="container">
         <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">
           Add Listing

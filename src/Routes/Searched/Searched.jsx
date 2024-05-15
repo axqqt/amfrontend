@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
@@ -40,9 +41,10 @@ const Searched = () => {
     >
       <div className="container flex flex-col ">
         {loading ? (
-          <h1>Loading...</h1>
+          <h1 style={{color:"white"}}>Loading...</h1>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5" style={{color:"white"}}>
+
             {data && data.length ? (
               <>
                 {Array.isArray(data) && data.length > 0 ? (
@@ -96,7 +98,7 @@ const Searched = () => {
                 )}
               </>
             ) : (
-              <h1>No results found</h1>
+              <h1>{`No results matching ${item}`} </h1>
             )}
           </div>
         )}
