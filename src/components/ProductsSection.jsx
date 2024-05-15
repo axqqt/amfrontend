@@ -136,6 +136,7 @@ function ProductsSection() {
             </>
           )}
         </div>
+       
         {/* Render See More button if there are more cards to display */}
         {data.length > visibleCards && (
           <div className="flex justify-center mt-4">

@@ -18,7 +18,6 @@ const SeeMore = () => {
       const response = await Axios.get(`${BASE}/mains?type=${selectedType}`);
       if (response.status === 200) {
         setData(response.data);
-        setStatus(""); // Clear any previous error status
       } else {
         setStatus("Error!"); // Set error status for non-200 responses
       }
