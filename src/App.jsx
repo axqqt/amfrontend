@@ -27,7 +27,7 @@ export const UserContext = React.createContext();
 
 function App({ location }) {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({});
+  const [company, setCompany] = useState({}); //containing user
   const [affiliate, setAffiliate] = useState(true);
 
   const BASE = "http://localhost:8000";

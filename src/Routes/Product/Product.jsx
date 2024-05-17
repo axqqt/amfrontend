@@ -35,7 +35,7 @@ const Product = () => {
     fetchItem();
   }, [id]);
 
-  async function openAffiliate() {
+  async function openAffiliate() { //affiliates
     setAffiliateMenu(!affiliateMenu);
     try {
       const response = await Axios.post(`${BASE}/affiliates`, {
