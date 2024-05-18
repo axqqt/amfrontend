@@ -17,17 +17,18 @@ const Affiliates = () => {
     try {
       setLoading(true);
       const response = await Axios.post(`${BASE}/affiliates/affiliated`, {
-        userId: company._id,
+        userId: company._id, //should be changed
       }); //test
       if (response.status === 200) {
         setStatus("Affiliated!"); //test msg
         setTimeout(()=>{
           navigator("/");
         },1500);
-      } else if (response.status === 404) {
+      } 
+    } catch (err) {
+     if (err.status === 404) {
         setStatus("User not found");
       }
-    } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
