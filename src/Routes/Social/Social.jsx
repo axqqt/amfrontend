@@ -3,6 +3,7 @@
 import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 const Social = () => {
   const { loading, setLoading, BASE, status, setStatus } =
@@ -59,6 +60,7 @@ const Social = () => {
         ) : (
           <h1>No results found</h1>
         )}
+        <div className="create"><Link to={"/write"}>Create A Post!</Link></div>
       </div>
       <h1>{status}</h1>
     </div>

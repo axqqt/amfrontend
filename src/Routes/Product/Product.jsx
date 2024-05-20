@@ -105,7 +105,6 @@ const Product = () => {
                             setStatus("Link Copied!");
                           }}
                         >
-                          {" "}
                           {Data?.affiliateLink}
                         </button>
                       </div>
