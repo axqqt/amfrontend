@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
 const Product = () => {
-  const { loading, setLoading, status, setStatus, BASE, affiliate } =
+  const { loading, setLoading, status, setStatus, BASE, affiliate, company } =
     useContext(UserContext);
   const { id } = useParams();
   const [Data, setData] = useState({});
@@ -40,10 +40,12 @@ const Product = () => {
     try {
       const response = await Axios.post(`${BASE}/affiliates`, {
         productId: id,
-        affiliateId: "testing",
+        affiliateId: company._id,
       });
       if (response.status === 200) {
         setStatus("Got data!");
+      }else if(response.status===500){
+        setStatus("You are not affiliated!")
       }
     } catch (err) {
       console.error(err);

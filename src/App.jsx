@@ -11,6 +11,7 @@ import SeeMore from "./Routes/Home/SeeMore/SeeMore";
 import Affiliates from "./Routes/Affiliates/Affiliates";
 import Social from "./Routes/Social/Social";
 import CreatePost from "./Routes/CreatePost/CreatePost";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -96,6 +97,7 @@ function App({ location }) {
             <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             <Route path="/procedure" element={<Procedure />} />
+            <Route path="/dashboard" element={company && affiliate && <Dashboard/>}></Route>
             <Route path="/product/:id" element={<Product />} />
             {company && company.gmail && (
               <Route path="/create" element={<Create />} />
