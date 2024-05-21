@@ -29,17 +29,25 @@ const Dashboard = () => {
 
   useEffect(() => {
     DashboardData();
+  
   }, [BASE]);
 
   return (
-    <div style={{color:"white"}}>
-      <h1>Dashboard</h1>
-      <div className="container">
-        <span>
-          <label>Your total earnings!</label>
-          {/* <h2>{earnings}</h2> */}
-        </span>
-      </div>
+    <div style={{ color: "white" }}>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          <h1>Dashboard</h1>
+          <div className="container">
+            <span>
+              <label>Your total earnings!</label>
+              {/* <h2>{earnings}</h2> */}
+            </span>
+            <div className="status"><h1>{status}</h1></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
