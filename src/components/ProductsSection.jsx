@@ -44,7 +44,7 @@ function ProductsSection() {
   };
 
   return (
-    <section className="lg:px-24 py-12 flex justify-center items-start" id="products">
+    <section className="lg:px-24 py-12 flex justify-center items-start" id="products" style={{color:"white"}}>
       {loading && <h1 style={{color:"white"}}>Loading...</h1>}
       <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">

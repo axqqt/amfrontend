@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { UserContext } from "@/App";

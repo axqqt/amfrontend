@@ -12,6 +12,8 @@ import Affiliates from "./Routes/Affiliates/Affiliates";
 import Social from "./Routes/Social/Social";
 import CreatePost from "./Routes/CreatePost/CreatePost";
 import Dashboard from "./components/Dashboard/Dashboard";
+import BuyProduct from "./Routes/Product/BuyProduct";
+import Confirmation from "./Routes/Product/Confirmation";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -87,22 +89,43 @@ function App({ location }) {
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="social" element={<Social/>}></Route>
+            <Route path="/" element={<Home />} /> {/**Homepage*/}
+            <Route path="social" element={<Social />}></Route>
+            {/**Social Section */}
             <Route path="/more" element={<SeeMore />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} /> {/**Register*/}
+            <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/write" element={<CreatePost />} />
-            <Route path="/affiliates" element={<Affiliates />} />
+            {/**Create social post*/}
+            <Route path="/affiliates" element={company && <Affiliates />} />
+            {/**Joins program */}
             <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
+            {/**Search bar*/}
             <Route path="/procedure" element={<Procedure />} />
-            <Route path="/dashboard" element={company && affiliate && <Dashboard/>}></Route>
+            {/**How to start*/}
+            <Route
+              path="/purchase/:id"
+              element={company && <BuyProduct />}
+            ></Route>
+            {/**Buying product*/}
+            <Route
+              path="/confirmation/:id"
+              element={company && <Confirmation />}
+            ></Route>
+            {/**Order confirmation*/}
+            <Route
+              path="/dashboard"
+              element={company && affiliate && <Dashboard />}
+            ></Route>
+            {/**Calculates earnings */}
             <Route path="/product/:id" element={<Product />} />
+            {/**Redirects to product */}
             {company && company.gmail && (
               <Route path="/create" element={<Create />} />
             )}
-            <Route path="*" element={<NotFound/>}></Route>
+            {/**Create listing*/}
+            <Route path="*" element={<NotFound />}></Route>
             {/* <Route path="/create" element={<Create />} /> */}
           </Routes>
         </Suspense>

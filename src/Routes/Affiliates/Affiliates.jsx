@@ -41,9 +41,9 @@ const Affiliates = () => {
 
   return (
     <div style={{ color: "white" }}>
-      {company && (
+      {company && company?._id (
         <div>
-          {/* <h1>Affiliates</h1> */}
+          <h1>Get Affiliated Today!</h1>
           <div className="container">
             <form onSubmit={Affiliates}>
               <h1>Become an Affiliate Today!</h1>

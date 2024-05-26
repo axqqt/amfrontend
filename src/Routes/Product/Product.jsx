@@ -133,16 +133,16 @@ const Product = () => {
               </div>
               <div className="w-full">
                 {Data.stock ? (
-                  <Link to={Data.link} target="_blank" className="w-full">
+                  <Link to={`/purchase/${id}`} target="_blank" className="w-full">
                     <Button className="flex justify-center w-full">
                       <h1>Buy Now!</h1>
                     </Button>
                   </Link>
                 ) : (
                   <div className="out" onClick={()=>{alert(`${Data.title} Is Out of Stock`)}}>
-                    <Button className="flex justify-center w-full">
+                    <button className="flex justify-center w-full" disabled={true}>
                       <h1 >Item out of stock</h1>
-                    </Button>
+                    </button>
                   </div>
                 )}
               </div>
