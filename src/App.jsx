@@ -89,6 +89,7 @@ function App({ location }) {
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
           <Routes>
+            {/**There needs to be a ranking system! */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}
@@ -98,7 +99,7 @@ function App({ location }) {
             <Route path="/write" element={<CreatePost />} />
             {/**Create social post*/}
             <Route path="/affiliates" element={company && <Affiliates />} />
-            {/**Joins program */}
+            {/**Joins program (existing user) */}
             <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             {/**Search bar*/}

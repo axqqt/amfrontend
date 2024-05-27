@@ -35,7 +35,8 @@ const Product = () => {
     fetchItem();
   }, [id]);
 
-  async function openAffiliate() { //affiliates
+  async function openAffiliate() {
+    //affiliates
     setAffiliateMenu(!affiliateMenu);
     try {
       const response = await Axios.post(`${BASE}/affiliates`, {
@@ -44,8 +45,8 @@ const Product = () => {
       });
       if (response.status === 200) {
         setStatus("Got data!");
-      }else if(response.status===500){
-        setStatus("You are not affiliated!")
+      } else if (response.status === 500) {
+        setStatus("You are not affiliated!");
       }
     } catch (err) {
       console.error(err);
@@ -58,7 +59,7 @@ const Product = () => {
   return (
     <section className="h-full flex w-full md:p-24">
       {loading ? (
-        <h1 style={{color:"white"}}>Loading...</h1>
+        <h1 style={{ color: "white" }}>Loading...</h1>
       ) : (
         <div className="container">
           <div className="flex md:justify-between flex-col md:flex-row justify-center gap-6 flex-auto items-center w-full">
@@ -93,11 +94,23 @@ const Product = () => {
               </button>
             )}
             {affiliate && affiliateMenu && (
-              <div className="affiliates" style={{ color: "wheat"}}>
-                <div className="container" style={{border:"10px solid white"}}>
-                <p className="text-white md:text-start text-center font-bold text-2xl mt-5" style={{margin:"20px"}}>
-                  You will receive {Data.commission}% Commission Per Sale! , approx. {Data.price/Data.commission!==null ? Data.price/Data.commission  : <h1>0%</h1>}
-                </p>
+              <div className="affiliates" style={{ color: "wheat" }}>
+                <div
+                  className="container"
+                  style={{ border: "10px solid white" }}
+                >
+                  <p
+                    className="text-white md:text-start text-center font-bold text-2xl mt-5"
+                    style={{ margin: "20px" }}
+                  >
+                    You will receive {Data.commission}% Commission Per Sale! ,
+                    approx.{" "}
+                    {Data.price / Data.commission !== null ? (
+                      Data.price / Data.commission
+                    ) : (
+                      <h1>0%</h1>
+                    )}
+                  </p>
                   <div className="outcome">
                     {Data.length ? (
                       <div>
@@ -129,19 +142,30 @@ const Product = () => {
                 <p className="text-muted mt-5 text-center md:text-start text-xs md:text-sm">
                   {Data.description}
                 </p>
-
               </div>
               <div className="w-full">
                 {Data.stock ? (
-                  <Link to={`/purchase/${id}`} target="_blank" className="w-full">
+                  <Link
+                    to={`/purchase/${id}`}
+                    target="_blank"
+                    className="w-full"
+                  >
                     <Button className="flex justify-center w-full">
                       <h1>Buy Now!</h1>
                     </Button>
                   </Link>
                 ) : (
-                  <div className="out" onClick={()=>{alert(`${Data.title} Is Out of Stock`)}}>
-                    <button className="flex justify-center w-full" disabled={true}>
-                      <h1 >Item out of stock</h1>
+                  <div
+                    className="out"
+                    onClick={() => {
+                      alert(`${Data.title} Is Out of Stock`);
+                    }}
+                  >
+                    <button
+                      className="flex justify-center w-full"
+                      disabled={true}
+                    >
+                      <h1>Item out of stock</h1>
                     </button>
                   </div>
                 )}
