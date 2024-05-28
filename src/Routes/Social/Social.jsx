@@ -35,32 +35,45 @@ const Social = () => {
     <div style={{ color: "white", margin: "40px" }}>
       {loading && <h1>Loading...</h1>}
 
-      <div className="s-container">
-        {/* <ul>
-          <li>
-            <a href="default.asp">Home</a>
-          </li>
-          <li>
-            <a href="news.asp">News</a>
-          </li>
-          <li>
-            <a href="contact.asp">Contact</a>
-          </li>
-          <li>
-            <a href="about.asp">About</a>
-          </li>
-        </ul> */}
-      </div>
+      <div className="s-container"></div>
       <div>
         <h1>Social</h1>
         {blog && blog.length ? (
           <div>
-            <h2>{JSON.stringify(blog)}</h2>
+            <h2>
+              {blog.map((iterate) => {
+                <div className="container">
+                  <h1>{iterate.title}</h1>
+                  <h2>{iterate.content}</h2>
+                  <h3>{iterate.category}</h3>
+                  {iterate.image && (
+                    <img
+                      src={iterate.image}
+                      alt={`Image of ${iterate.title}`}
+                    ></img>
+                  )}
+                  <h4>{iterate.tags}</h4>
+                  <div className="comments">
+                    {iterate.comments.array.forEach((element) => {
+                      <h1>{element}</h1>;
+                    })}
+                  </div>
+                  <label>
+                    <span>
+                      <h1>Added on</h1>
+                      <h2>{iterate.createdAt}</h2>
+                    </span>
+                  </label>
+                </div>;
+              })}
+            </h2>
           </div>
         ) : (
           <h1>No results found</h1>
         )}
-        <div className="create"><Link to={"/write"}>Create A Post!</Link></div>
+        <div className="create">
+          <Link to={"/write"}>Create A Post!</Link>
+        </div>
       </div>
       <h1>{status}</h1>
     </div>

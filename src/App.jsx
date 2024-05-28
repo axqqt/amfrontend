@@ -14,6 +14,7 @@ import CreatePost from "./Routes/CreatePost/CreatePost";
 import Dashboard from "./components/Dashboard/Dashboard";
 import BuyProduct from "./Routes/Product/BuyProduct";
 import Confirmation from "./Routes/Product/Confirmation";
+import Company from "./Routes/Company/Company";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -31,7 +32,8 @@ export const UserContext = React.createContext();
 
 function App({ location }) {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({}); //containing user
+  const [company, setCompany] = useState({}); //containing user at the moment needs to be divided to user and company
+  const [user, setUser] = useState([]);
   const [affiliate, setAffiliate] = useState(true);
 
   const BASE = "http://localhost:8000";
@@ -81,6 +83,8 @@ function App({ location }) {
     BASE,
     affiliate,
     setAffiliate,
+    user,
+    setUser,
   };
 
   return (
@@ -94,6 +98,7 @@ function App({ location }) {
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}
             <Route path="/more" element={<SeeMore />} />
+            <Route path="/company" element={<Company/>}></Route>
             <Route path="/register" element={<Register />} /> {/**Register*/}
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/write" element={<CreatePost />} />
