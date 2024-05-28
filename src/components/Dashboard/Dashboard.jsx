@@ -96,7 +96,10 @@ const Dashboard = () => {
                 <label>Your total earnings!</label>
                 <h2>{earnings.reduce((acc, curr) => acc + curr.amount, 0)}</h2>
               </span>
-
+              <span>
+                <label>Your Rank!</label>
+                <h2>{earnings.filter((item)=>{item?.rank})}</h2>
+              </span>
               <div>
                 <Line data={data} options={options} />
               </div>

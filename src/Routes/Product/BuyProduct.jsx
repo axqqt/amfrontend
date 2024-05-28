@@ -34,23 +34,30 @@ const BuyProduct = () => {
   async function handleBuyProduct(e) {
     e.preventDefault();
     try {
-        setLoading(true);
-        const response = await Axios.post(`${BASE}/mains/buy`,{buyItem});
-        if (response.status === 200) {
-          setTimeout(()=>{
-            navigator(`/confirmation/${id}`);
-          },500);
+      setLoading(true);
+      const response = await Axios.post(`${BASE}/mains/buy`, { buyItem }).then(
+        async () => {
+          await Axios.post(`${BASE}/affiliates/purchase`, {
+            productId: buyItem._id,
+            amount: buyItem.amount,
+          });
         }
-      } catch (err) {
-        if (err.response?.status === 404) {
-          setStatus("No results found");
-        } else {
-          setStatus("An error occurred");
-        }
-        console.error(err);
-      } finally {
-        setLoading(false);
+      );
+      if (response.status === 200) {
+        setTimeout(() => {
+          navigator(`/confirmation/${id}`);
+        }, 500);
       }
+    } catch (err) {
+      if (err.response?.status === 404) {
+        setStatus("No results found");
+      } else {
+        setStatus("An error occurred");
+      }
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
