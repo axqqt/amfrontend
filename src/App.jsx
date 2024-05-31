@@ -95,14 +95,15 @@ function App({ location }) {
           <Routes>
             {/**There needs to be a ranking system! */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
+            <Route path="/more" element={<SeeMore />} />{" "}
+            {/**View more about a product */}
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}
-            <Route path="/more" element={<SeeMore />} />
-            <Route path="/company" element={<Company/>}></Route>
-            <Route path="/register" element={<Register />} /> {/**Register*/}
-            <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/write" element={<CreatePost />} />
             {/**Create social post*/}
+            <Route path="/company" element={<Company />}></Route>
+            <Route path="/register" element={<Register />} /> {/**Register*/}
+            <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/affiliates" element={company && <Affiliates />} />
             {/**Joins program (existing user) */}
             <Route path="/login" element={<Login />} /> {/**Buggy */}
@@ -130,7 +131,7 @@ function App({ location }) {
             {company && company.gmail && (
               <Route path="/create" element={<Create />} />
             )}
-            {/**Create listing*/}
+            {/**Create COMPANY listing*/}
             <Route path="*" element={<NotFound />}></Route>
             {/* <Route path="/create" element={<Create />} /> */}
           </Routes>

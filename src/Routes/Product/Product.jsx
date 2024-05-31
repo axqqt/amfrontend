@@ -164,6 +164,7 @@ const Product = () => {
                     <button
                       className="flex justify-center w-full"
                       disabled={true}
+                      style={{color:"white"}}
                     >
                       <h1>Item out of stock</h1>
                     </button>

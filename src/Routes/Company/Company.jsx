@@ -34,7 +34,7 @@ const Company = () => {
       setLoading(true);
       await Axios.post(`${BASE}/company`, { newCompany }).then((data) => {
         if (data.status === 200) {
-          setStatus("You are registered 🎉");
+          setStatus(`${newCompany.title} Registered 🎉`);
           setCompany(data.data); //what's sent from the backend (needs to be implemented)
 
           setTimeout(() => {
