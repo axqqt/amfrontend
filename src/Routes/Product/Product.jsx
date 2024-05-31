@@ -94,14 +94,14 @@ const Product = () => {
               </button>
             )}
             {affiliate && affiliateMenu && (
-              <div className="affiliates" style={{ color: "wheat" }}>
+              <div className="affiliates" style={{ color: "wheat",margin:"80px" }}>
                 <div
                   className="container"
                   style={{ border: "10px solid white" }}
                 >
                   <p
                     className="text-white md:text-start text-center font-bold text-2xl mt-5"
-                    style={{ margin: "20px" }}
+                    style={{ margin: "20px",padding:"40px" }}
                   >
                     You will receive {Data.commission}% Commission Per Sale! ,
                     approx.{" "}
@@ -164,7 +164,7 @@ const Product = () => {
                     <button
                       className="flex justify-center w-full"
                       disabled={true}
-                      style={{color:"white"}}
+                      style={{ color: "white" }}
                     >
                       <h1>Item out of stock</h1>
                     </button>

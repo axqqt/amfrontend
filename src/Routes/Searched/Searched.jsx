@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import Search from "../Search/Search";
 
 const Searched = () => {
   const { loading, setLoading, status, setStatus, BASE } =
@@ -39,12 +40,17 @@ const Searched = () => {
       className="lg:px-24 py-12 justify-center items-start"
       id="products"
     >
+      <div className="search">
+        <Search />
+      </div>
       <div className="container flex flex-col ">
         {loading ? (
-          <h1 style={{color:"white"}}>Loading...</h1>
+          <h1 style={{ color: "white" }}>Loading...</h1>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5" style={{color:"white"}}>
-
+          <div
+            className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 gap-x-6 mt-5"
+            style={{ color: "white" }}
+          >
             {data && data.length ? (
               <>
                 {Array.isArray(data) && data.length > 0 ? (

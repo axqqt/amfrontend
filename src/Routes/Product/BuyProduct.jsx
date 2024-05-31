@@ -10,6 +10,12 @@ const BuyProduct = () => {
   const { loading, setLoading, status, setStatus, BASE } =
     useContext(UserContext);
   const [buyItem, setBuyItem] = useState({});
+  const [userCard, setUserCard] = useState({
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardholderName: "",
+  });
   const navigator = useNavigate();
 
   async function fetchProduct() {
@@ -35,14 +41,15 @@ const BuyProduct = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await Axios.post(`${BASE}/mains/buy`, { buyItem }).then(
-        async () => {
-          await Axios.post(`${BASE}/affiliates/purchase`, {
-            productId: buyItem._id,
-            amount: buyItem.amount,
-          });
-        }
-      );
+      const response = await Axios.post(`${BASE}/mains/buy`, {
+        buyItem,
+        paymentInfo: userCard,
+      }).then(async () => {
+        await Axios.post(`${BASE}/affiliates/purchase`, {
+          productId: buyItem._id,
+          amount: buyItem.amount,
+        });
+      });
       if (response.status === 200) {
         setTimeout(() => {
           navigator(`/confirmation/${id}`);
@@ -64,8 +71,16 @@ const BuyProduct = () => {
     fetchProduct();
   }, [id]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserCard((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
-    <div>
+    <div style={{color:"white"}}>
       <h1>Checkout</h1>
       {loading ? (
         <h1>Loading...</h1>
@@ -74,6 +89,46 @@ const BuyProduct = () => {
           <h1>{buyItem?.title}</h1>
           <h2>{buyItem?.price}</h2>
           <form onSubmit={handleBuyProduct}>
+            <div>
+              <label>Card Number:</label>
+              <input
+                type="text"
+                name="cardNumber"
+                value={userCard.cardNumber}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Expiry Date:</label>
+              <input
+                type="text"
+                name="expiryDate"
+                value={userCard.expiryDate}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>CVV:</label>
+              <input
+                type="text"
+                name="cvv"
+                value={userCard.cvv}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Cardholder Name:</label>
+              <input
+                type="text"
+                name="cardholderName"
+                value={userCard.cardholderName}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
             <button type="submit" disabled={loading}>
               Buy!
             </button>

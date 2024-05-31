@@ -8,13 +8,14 @@ function ProductsSection() {
   const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
+  const [selectedProductType, setSelectedProductType] = useState("all");
   const [visibleCards, setVisibleCards] = useState(12); // Initially show 12 cards
   const navigate = useNavigate();
 
   async function fetchContent() {
     try {
       setLoading(true);
-      const response = await Axios.get(`${BASE}/mains?type=${selectedType}`);
+      const response = await Axios.get(`${BASE}/mains?type=${selectedType}&productType=${selectedProductType}`);
       if (response.status === 200) {
         setData(response.data);
       } else if (response.status === 404) {
@@ -33,10 +34,14 @@ function ProductsSection() {
   useEffect(() => {
     fetchContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedType]);
+  }, [selectedType, selectedProductType]);
 
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
+  };
+
+  const handleProductTypeChange = (e) => {
+    setSelectedProductType(e.target.value);
   };
 
   const handleSeeMore = () => {
@@ -49,13 +54,13 @@ function ProductsSection() {
       <div className="container flex flex-col ">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
-          <div className="md:flex justify-between items-center hidden">
+          <div className="flex justify-between items-center gap-4">
             <select
               value={selectedType}
               className="p-2 rounded-lg bg-slate-900 border border-border text-white"
               onChange={handleTypeChange}
             >
-          <option  value="all">All</option>
+              <option value="all">All</option>
               <option value="electronics">Electronics</option>
               <option value="fashion">Fashion</option>
               <option value="health">Health</option>
@@ -63,17 +68,14 @@ function ProductsSection() {
               <option value="home">Home</option>
               <option value="outdoors">Outdoors</option>
             </select>
-          </div>
-          <div className="flex justify-between items-center md:hidden">
             <select
-              value={selectedType}
-              className="p-2 rounded-lg"
-              onChange={handleTypeChange}
+              value={selectedProductType}
+              className="p-2 rounded-lg bg-slate-900 border border-border text-white"
+              onChange={handleProductTypeChange}
             >
               <option value="all">All</option>
-              <option value="clothing">Clothing</option>
-              <option value="health">Health Care</option>
-              <option value="beauty">Beauty</option>
+              <option value="physical">Physical</option>
+              <option value="digital">Digital</option>
             </select>
           </div>
         </div>
@@ -87,7 +89,8 @@ function ProductsSection() {
                 data
                   .filter(
                     (item) =>
-                      selectedType === "all" || item.category === selectedType
+                      (selectedType === "all" || item.category === selectedType) &&
+                      (selectedProductType === "all" || item.productType === selectedProductType)
                   )
                   .slice(0, visibleCards) // Limit to visibleCards
                   .map((item) => (

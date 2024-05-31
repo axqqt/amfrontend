@@ -30,7 +30,7 @@ function Contact() {
 
   return (
     <section className="h-screen flex flex-col justify-center items-center w-full p-24">
-      <div className="container">
+      <div className="container" style={{color:"white"}}>
         <div className="flex flex-col justify-between items-center gap-6 h-full">
           <div className="flex flex-col gap-5 items-center">
             <h1 className="text-5xl text-white text-center font-bold">
@@ -66,10 +66,10 @@ function Contact() {
         <h1>{status}</h1>
         {loading && <h1>Loading...</h1>}
         <form onSubmit={ContactUsEmail}>
-          <input onChange={handleChange} name="title"></input>
-          <input onChange={handleChange} name="description"></input>
-          <input onChange={handleChange} name="email"></input>
-          <button type="submit" disabled={loading}>
+          <input onChange={handleChange} name="title" placeholder="Enter title..."></input>
+          <input onChange={handleChange} name="description" placeholder="Enter description..."></input>
+          <input onChange={handleChange} name="email" placeholder="Enter email..."></input>
+          <button type="submit" disabled={loading} style={{color:"white",padding:"40px"}}>
             Report!
           </button>
         </form>

@@ -55,6 +55,7 @@ const Nav = () => {
                 <Button variant={"whiteMobile"}>Become a member</Button>
               </Link>
             </div>
+
             {company && company.gmail ? (
               <button
                 onClick={Logout}
@@ -67,6 +68,9 @@ const Nav = () => {
                 <Button variant={"outline"}>Sign in</Button>
               </Link>
             )}
+             <Link to="/company">
+              <Button variant={"whiteMobile"}>Company Registration</Button>
+            </Link>
           </div>
         </div>
       </div>

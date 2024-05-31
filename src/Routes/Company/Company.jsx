@@ -59,12 +59,13 @@ const Company = () => {
 
   return (
     <div>
-      <div className="container">
+      <div className="container" style={{color:"white",margin:"40px"}}>
         {loading && <h1>Loading...</h1>}
         <div className="company-check">
-          {company && <h1>{`${company.name} is already associated!`}</h1>}
+          {company && company.mail && <h1>{`${company.name} is already associated!`}</h1>}
         </div>
-        <form onSubmit={RegisterCompany}>
+        <h1 style={{textAlign:'center',fontSize:32}}>Company Registration!</h1>
+        <form onSubmit={RegisterCompany} style={{margin:"40px"}}>
           <input
             name="title"
             onChange={handleChange}
@@ -78,7 +79,7 @@ const Company = () => {
             placeholder="Enter description..."
           ></input>
           {/**All I can think of for now */}
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} style={{padding:"40px"}}>
             Register!
           </button>
         </form>
