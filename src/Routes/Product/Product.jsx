@@ -124,7 +124,7 @@ const Product = () => {
                         </button>
                       </div>
                     ) : (
-                      <div>
+                      <div style={{margin:"40px"}}>
                         <h1>Error while getting your link</h1>
                       </div>
                     )}

@@ -1,14 +1,19 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../../App";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
+
 export function Logout() {
   localStorage.removeItem("company");
   window.location.reload();
 }
+
 const Nav = () => {
   const { company } = useContext(UserContext);
+  const location = useLocation();
+
+  const isBaseRoute = location.pathname === "/";
 
   return (
     <nav className="py-5 w-full lg:px-24">
@@ -68,9 +73,14 @@ const Nav = () => {
                 <Button variant={"outline"}>Sign in</Button>
               </Link>
             )}
-             <Link to="/company">
+            <Link to="/company">
               <Button variant={"whiteMobile"}>Company Registration</Button>
             </Link>
+            {isBaseRoute && (
+              <Link to="/feedback">
+                <Button variant={"whiteMobile"}>Feedback</Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

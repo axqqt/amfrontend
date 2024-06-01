@@ -5,7 +5,7 @@ import Axios from "axios";
 import { UserContext } from "@/App";
 
 function ProductsSection() {
-  const { company, loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
+  const { loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [selectedProductType, setSelectedProductType] = useState("all");
@@ -33,7 +33,6 @@ function ProductsSection() {
 
   useEffect(() => {
     fetchContent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedType, selectedProductType]);
 
   const handleTypeChange = (e) => {
@@ -45,13 +44,13 @@ function ProductsSection() {
   };
 
   const handleSeeMore = () => {
-    navigate("/more");
+    setVisibleCards((prev) => prev + 12); // Show 12 more cards
   };
 
   return (
-    <section className="lg:px-24 py-12 flex justify-center items-start" id="products" style={{color:"white"}}>
-      {loading && <h1 style={{color:"white"}}>Loading...</h1>}
-      <div className="container flex flex-col ">
+    <section className="lg:px-24 py-12 flex justify-center items-start" id="products" style={{ color: "white" }}>
+      {loading && <h1 style={{ color: "white" }}>Loading...</h1>}
+      <div className="container flex flex-col">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-start text-white text-3xl font-bold">Products</h1>
           <div className="flex justify-between items-center gap-4">
@@ -87,11 +86,6 @@ function ProductsSection() {
             <>
               {Array.isArray(data) && data.length > 0 ? (
                 data
-                  .filter(
-                    (item) =>
-                      (selectedType === "all" || item.category === selectedType) &&
-                      (selectedProductType === "all" || item.productType === selectedProductType)
-                  )
                   .slice(0, visibleCards) // Limit to visibleCards
                   .map((item) => (
                     <Link to={`/product/${item._id}`} key={item._id}>
@@ -139,11 +133,10 @@ function ProductsSection() {
             </>
           )}
         </div>
-       
-        {/* Render See More button if there are more cards to display */}
+
         {data.length > visibleCards && (
           <div className="flex justify-center mt-4">
-            <button className="text-white hover:text-muted transition-all" onClick={handleSeeMore} >
+            <button className="text-white hover:text-muted transition-all" onClick={handleSeeMore}>
               See More
             </button>
           </div>
