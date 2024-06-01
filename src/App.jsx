@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import BuyProduct from "./Routes/Product/BuyProduct";
 import Confirmation from "./Routes/Product/Confirmation";
 import Company from "./Routes/Company/Company";
+import MyBasket from "./Routes/MyOrders/MyBasket";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -35,6 +36,7 @@ function App({ location }) {
   const [company, setCompany] = useState({}); //containing user at the moment needs to be divided to user and company
   const [user, setUser] = useState([]);
   const [affiliate, setAffiliate] = useState(true);
+  const [toggleBot,setToggleBot] = useState(false);
 
   const BASE = "http://localhost:8000";
 
@@ -85,6 +87,8 @@ function App({ location }) {
     setAffiliate,
     user,
     setUser,
+    toggleBot,
+    setToggleBot
   };
 
   return (
@@ -92,19 +96,19 @@ function App({ location }) {
       <UserContext.Provider value={theStates}>
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
+          <ChatBox/> {/**Plugged to gemini */}
           <Routes>
             {/**There needs to be a ranking system! */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
-            <Route path="/more" element={<SeeMore />} />{" "}
+            <Route path="/more" element={<SeeMore />} />
             {/**View more about a product */}
-            <Route path="social" element={<Social />}></Route>
-            {/**Social Section */}
-            <Route path="/write" element={<CreatePost />} />
-            {/**Create social post*/}
             <Route path="/company" element={<Company />}></Route>
             <Route path="/register" element={<Register />} /> {/**Register*/}
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
-            <Route path="/affiliates" element={company && <Affiliates />} />
+            <Route path="/affiliates" element={<Affiliates />} />
+            {/**company &&  */}
+            <Route path="/mybasket" element={<MyBasket />}></Route>
+            {/**User's basket (CAN CANCEL ORDERS) */}
             {/**Joins program (existing user) */}
             <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
@@ -132,8 +136,12 @@ function App({ location }) {
               <Route path="/create" element={<Create />} />
             )}
             {/**Create COMPANY listing*/}
+            <Route path="social" element={<Social />}></Route>
+            {/**Social Section */}
+            <Route path="/write" element={<CreatePost />} />
+            {/**Create social post*/}
             <Route path="*" element={<NotFound />}></Route>
-            {/* <Route path="/create" element={<Create />} /> */}
+            {/**Handles exceptions */}
           </Routes>
         </Suspense>
       </UserContext.Provider>

@@ -21,12 +21,12 @@ const Affiliates = () => {
       }); //test
       if (response.status === 200) {
         setStatus("Affiliated!"); //test msg
-        setTimeout(()=>{
+        setTimeout(() => {
           navigator("/");
-        },1500);
-      } 
+        }, 1500);
+      }
     } catch (err) {
-     if (err.status === 404) {
+      if (err.status === 404) {
         setStatus("User not found");
       }
       console.error(err);
@@ -41,7 +41,7 @@ const Affiliates = () => {
 
   return (
     <div style={{ color: "white" }}>
-      {company && company?._id (
+      {/* {company && company?._id (
         <div>
           <h1>Get Affiliated Today!</h1>
           <div className="container">
@@ -54,7 +54,20 @@ const Affiliates = () => {
           </div>
           <h1>{status}</h1>
         </div>
-      )}
+      )} */}
+
+      <div>
+        <h1>Get Affiliated Today!</h1>
+        <div className="container">
+          <form onSubmit={Affiliates}>
+            <h1>Become an Affiliate Today!</h1>
+            <button type="submit" disabled={loading}>
+              Join!
+            </button>
+          </form>
+        </div>
+        <h1>{status}</h1>
+      </div>
     </div>
   );
 };

@@ -90,7 +90,7 @@ const Product = () => {
                 style={{ color: "white" }}
                 onClick={openAffiliate}
               >
-                Get Affiliate Link
+                {!affiliateMenu ? <h1>     Get Affiliate Link</h1> : <h1>Hide Affiliate Menu!</h1>}
               </button>
             )}
             {affiliate && affiliateMenu && (
