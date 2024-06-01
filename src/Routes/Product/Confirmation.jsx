@@ -36,14 +36,19 @@ const Confirmation = () => {
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="container">
+        <div className="container" style={{margin:"40px"}}>
           <h1>Thanks You for your order!</h1>
           <div className="order" style={{ margin: "40px" }}>
             <h1>Your order number is {id}</h1>
             <h2>Test order no : {orderNo}</h2>
           </div>
           <p>{status}</p>
-          <Link to={"/"}>Go back home? 😎</Link>
+          <div className="bottom" style={{ margin: "40px" }}>
+            <button style={{ margin: "40px" }}>
+              <Link to={"/mybasket"}>View Orders!</Link>
+            </button>
+            <Link to={"/"}>Go back home? 😎</Link>
+          </div>
         </div>
       )}
     </div>

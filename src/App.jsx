@@ -36,7 +36,7 @@ function App({ location }) {
   const [company, setCompany] = useState({}); //containing user at the moment needs to be divided to user and company
   const [user, setUser] = useState([]);
   const [affiliate, setAffiliate] = useState(true);
-  const [toggleBot,setToggleBot] = useState(false);
+  const [toggleBot, setToggleBot] = useState(false);
 
   const BASE = "http://localhost:8000";
 
@@ -88,7 +88,7 @@ function App({ location }) {
     user,
     setUser,
     toggleBot,
-    setToggleBot
+    setToggleBot,
   };
 
   return (
@@ -96,7 +96,7 @@ function App({ location }) {
       <UserContext.Provider value={theStates}>
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
-          <ChatBox/> {/**Plugged to gemini */}
+          <ChatBox /> {/**Plugged to gemini */}
           <Routes>
             {/**There needs to be a ranking system! */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
@@ -125,10 +125,11 @@ function App({ location }) {
               element={company && <Confirmation />}
             ></Route>
             {/**Order confirmation*/}
-            <Route
+            {/* <Route
               path="/dashboard"
-              element={company && affiliate && <Dashboard />}
-            ></Route>
+              element={(company || affiliate) && <Dashboard />}
+            /> */}
+            <Route path="/dashboard" element={<Dashboard/>}></Route>
             {/**Calculates earnings */}
             <Route path="/product/:id" element={<Product />} />
             {/**Redirects to product */}

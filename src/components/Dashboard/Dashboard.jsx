@@ -1,30 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// import "./Dashboard.css"; // Import your CSS file for styling
 
 const Dashboard = () => {
   const { status, setStatus, BASE, company, loading, setLoading } =
@@ -83,34 +63,36 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ color: "white" }}>
+    <div className="dashboard-container">
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        company && (
-          <div>
+       (
+          <div className="dashboard-content">
             <h1>Dashboard</h1>
-            <div className="container">
-              <h1>{`Welcome back ${company?.username}!`}</h1>
-              <span>
-                <label>Your total earnings!</label>
-                <h2>{earnings.reduce((acc, curr) => acc + curr.amount, 0)}</h2>
-              </span>
-              <span>
-                <label>Your Rank!</label>
-                <h2>{earnings.filter((item)=>{item?.rank})}</h2>
-              </span>
-              <div>
-                <Line data={data} options={options} />
+            <div className="welcome-message">
+              <h1>{`Welcome back, ${company?.username}!`}</h1>
+            </div>
+            <div className="earnings-info">
+              <div className="total-earnings">
+                <label>Your total earnings:</label>
+                <h2>${earnings.reduce((acc, curr) => acc + curr.amount, 0)}</h2>
               </div>
-
-              <div className="status">
-                <h1>{status}</h1>
+              <div className="rank-info">
+                <label>Your Rank:</label>
+                <h2>{company.rank}</h2> {/* Assuming company.rank holds the rank info */}
               </div>
+            </div>
+            <div className="earnings-chart">
+              <Line data={data} options={options} />
+            </div>
+            <div className="status">
+              <h1>{status}</h1>
             </div>
           </div>
         )
       )}
+      
     </div>
   );
 };

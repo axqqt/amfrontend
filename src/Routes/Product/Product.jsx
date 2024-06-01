@@ -31,6 +31,8 @@ const Product = () => {
     }
   }
 
+  let testData = "veloxal";
+
   useEffect(() => {
     fetchItem();
   }, [id]);
@@ -144,7 +146,8 @@ const Product = () => {
                 </p>
               </div>
               <div className="w-full">
-                {Data.stock ? (
+                {/**Data.stock */}
+                { testData==="veloxal" ? ( 
                   <Link
                     to={`/purchase/${id}`}
                     target="_blank"

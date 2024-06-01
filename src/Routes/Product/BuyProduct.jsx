@@ -79,57 +79,102 @@ const BuyProduct = () => {
     }));
   };
 
+  const containerStyle = {
+    margin: "40px",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    backgroundColor: "#333",
+    color: "white",
+  };
+
+  const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  };
+
+  const inputStyle = {
+    padding: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+  };
+
+  const labelStyle = {
+    marginBottom: "5px",
+    fontWeight: "bold",
+  };
+
+  const buttonStyle = {
+    padding: "10px 20px",
+    borderRadius: "5px",
+    border: "none",
+    backgroundColor: "#007BFF",
+    color: "white",
+    fontSize: "16px",
+    cursor: "pointer",
+  };
+
   return (
-    <div style={{color:"white"}}>
+    <div style={{ color: "white", padding: "20px" }}>
       <h1>Checkout</h1>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="container">
-          <h1>{buyItem?.title}</h1>
-          <h2>{buyItem?.price}</h2>
-          <form onSubmit={handleBuyProduct}>
+        <div style={containerStyle}>
+          <div className="item-details" style={{ margin: "40px" }}>
+            {" "}
+            <h1>{buyItem?.title}</h1>
+            <h2>{buyItem?.price}</h2>
+            <h3>Product user is buying! {id}</h3> {/** Temporary! */}
+          </div>
+          <form onSubmit={handleBuyProduct} style={formStyle}>
             <div>
-              <label>Card Number:</label>
+              <label style={labelStyle}>Card Number:</label>
               <input
                 type="text"
                 name="cardNumber"
                 value={userCard.cardNumber}
                 onChange={handleInputChange}
                 required
+                style={inputStyle}
               />
             </div>
             <div>
-              <label>Expiry Date:</label>
+              <label style={labelStyle}>Expiry Date:</label>
               <input
                 type="text"
                 name="expiryDate"
                 value={userCard.expiryDate}
                 onChange={handleInputChange}
                 required
+                style={inputStyle}
               />
             </div>
             <div>
-              <label>CVV:</label>
+              <label style={labelStyle}>CVV:</label>
               <input
                 type="text"
                 name="cvv"
                 value={userCard.cvv}
                 onChange={handleInputChange}
                 required
+                style={inputStyle}
               />
             </div>
             <div>
-              <label>Cardholder Name:</label>
+              <label style={labelStyle}>Cardholder Name:</label>
               <input
                 type="text"
                 name="cardholderName"
                 value={userCard.cardholderName}
                 onChange={handleInputChange}
                 required
+                style={inputStyle}
               />
             </div>
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} style={buttonStyle}>
               Buy!
             </button>
           </form>
