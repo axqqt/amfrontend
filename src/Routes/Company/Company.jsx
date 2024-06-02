@@ -14,13 +14,15 @@ const Company = () => {
   async function CompanyCheck() {
     try {
       setLoading(true);
-      await Axios.post(`${BASE}/company/validation`, { company }).then((data) => {
-        if (data.status === 404) {
-          RegisterCompany();
-        } else if (data.status === 200) {
-          setStatus("Company already exists!");
+      await Axios.post(`${BASE}/company/validation`, { company }).then(
+        (data) => {
+          if (data.status === 404) {
+            RegisterCompany();
+          } else if (data.status === 200) {
+            setStatus("Company already exists!");
+          }
         }
-      });
+      );
     } catch (err) {
       console.error(err);
     } finally {
@@ -59,7 +61,7 @@ const Company = () => {
 
   return (
     <div>
-      {!company ? (
+      {!company.length ? (
         <div className="container" style={{ color: "white", margin: "40px" }}>
           {loading && <h1>Loading...</h1>}
           <div className="company-check">
@@ -99,7 +101,7 @@ const Company = () => {
           style={{
             color: "white",
             margin: "40px",
-            padding:"40px",
+            padding: "40px",
             fontSize: 32,
             textAlign: "center",
           }}
