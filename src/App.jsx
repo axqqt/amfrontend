@@ -22,6 +22,7 @@ import MiniGame2 from "./components/Games/MiniGame2";
 import Axios from "axios";
 import Claims from "./Routes/Claims/Claims";
 import CompanyDashboard from "./components/Dashboard/CompanyDashboard";
+import Popup from "./components/Games/Popup";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -50,7 +51,7 @@ function App({ location }) {
   async function updateScore() {
     try {
       setLoading(true);
-      await Axios.put(`${BASE}/affiliates/score`, { score }).then(
+      await Axios.put(`${BASE}/affiliates/score`, { score, user }).then(
         (response) => {
           if (response.status === 200) {
             console.log("Recorded!");
@@ -152,8 +153,9 @@ function App({ location }) {
       <UserContext.Provider value={theStates}>
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
+          {affiliate && <Popup/>} {/**Quiz for affiliates */}
           <ChatBox /> {/**Plugged to gemini */}
-          {showMiniGame && (
+          {showMiniGame &&  affiliate && (
             <div className="mini-game-wrapper">
               {getRandomMiniGame()}
               <button className="skip-button" onClick={handleSkipGame}>
@@ -168,9 +170,9 @@ function App({ location }) {
             {/**View more about a product */}
             <Route path="/company" element={<Company />}></Route>
             {/**Company related */}
-            {!user?.gmail && (
+            {!user?._id && (
               <>
-                <Route path="/register" element={<Register />} />{" "}
+                <Route path="/register" element={<Register />} />
                 {/**Register*/}
                 <Route path="/login" element={<Login />} /> {/**Login*/}
               </>
@@ -198,12 +200,19 @@ function App({ location }) {
               <Route path="/create" element={<Create />} />
             )}
             {/**Create COMPANY listing for non-normal users*/}
-            <Route path="/claims/:id/:price" element={<Claims />}></Route>
-            <Route path="/dashboard" element={affiliate._id && <Dashboard />}></Route>
-            <Route path="/companydashboard" element={company._id && <CompanyDashboard/>}></Route>
+            <Route path="/claims/:id/:price" element={<Claims />}></Route> {/**Claiming comissions */}
+            {/* <Route path="/dashboard" element={affiliate._id && <Dashboard />}></Route> */}
+            {/**Commented out for test */}
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            {/* <Route path="/companydashboard" element={company._id && <CompanyDashboard/>}></Route> */}
+            <Route
+              path="/companydashboard"
+              element={<CompanyDashboard />}
+            ></Route>
             {/**Calculates earnings and traces -> reporting back to user + company */}
             <Route path="/product/:id" element={<Product />} />
             {/**Redirects hashed link to product */}
+            {/**FOR MUCH LATER 👇🏻 */}
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}
             <Route path="/write" element={<CreatePost />} />

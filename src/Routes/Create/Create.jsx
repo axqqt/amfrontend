@@ -62,18 +62,19 @@ const Create = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData({ ...formData, [name]: name === "video" ? files[0] : value });
+    const newValue = name === "commission" ? (parseFloat(value) < 5 ? 5 : value) : value;
+    setFormData({ ...formData, [name]: name === "video" ? files[0] : newValue });
   };
 
   return (
     <section className="flex flex-col justify-between items-center w-full lg:p-24 h-full" style={{color:"white"}}>
       {loading && <h1>Loading...</h1>}
       <div className="container">
-        <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center" >
+        <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">
           Add Listing
         </h1>
         <form onSubmit={addContent} className="w-full" style={{margin:"60px"}}>
-          <div className="grid lg:grid-cols-2  grid-cols-1 gap-6 w-full">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 w-full">
             <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
               <h1 className="text-2xl text-primary font-bold">Main Details</h1>
               <p className="text-muted text-sm">Enter main details here...</p>
@@ -129,6 +130,7 @@ const Create = () => {
                   name="commission"
                   type="text"
                   value={formData.commission}
+                  min={5}
                   onChange={handleChange}
                   placeholder="Enter Commission"
                   className="p-2 rounded-lg"

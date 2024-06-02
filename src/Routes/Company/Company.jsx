@@ -1,28 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "@/App";
 
 const Company = () => {
-  const { loading, setLoading, BASE, status, setStatus, company, setCompany } =
-    useContext(UserContext);
-  const [newCompany, setNewCompany] = useState({ title: "", description: "" });
+  const { loading, setLoading, BASE, status, setStatus, company, setCompany } = useContext(UserContext);
+  const [newCompany, setNewCompany] = useState({
+    name: "",
+    registrationNumber: "",
+    address: "",
+    country: "",
+    email: "",
+    phone: "",
+    website: ""
+  });
   const navigator = useNavigate();
 
   async function CompanyCheck() {
     try {
       setLoading(true);
-      await Axios.post(`${BASE}/company/validation`, { company }).then(
-        (data) => {
-          if (data.status === 404) {
-            RegisterCompany();
-          } else if (data.status === 200) {
-            setStatus("Company already exists!");
-          }
-        }
-      );
+      const response = await Axios.post(`${BASE}/companys/validation`, { company: newCompany });
+      if (response.status === 200) {
+        setStatus("Company already exists!");
+        setCompany(response.data);
+      } else if (response.status === 404) {
+        setStatus("Company not found. You can register a new one.");
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -34,16 +39,15 @@ const Company = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await Axios.post(`${BASE}/company`, { newCompany }).then((data) => {
-        if (data.status === 200) {
-          setStatus(`${newCompany.title} Registered 🎉`);
-          setCompany(data.data); //what's sent from the backend (needs to be implemented)
+      const response = await Axios.post(`${BASE}/company/registration`, { newCompany });
+      if (response.status === 200) {
+        setStatus(`${newCompany.name} Registered 🎉`);
+        setCompany(response.data);
 
-          setTimeout(() => {
-            navigator("/");
-          }, 2000);
-        }
-      });
+        setTimeout(() => {
+          navigator("/");
+        }, 2000);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -65,7 +69,7 @@ const Company = () => {
         <div className="container" style={{ color: "white", margin: "40px" }}>
           {loading && <h1>Loading...</h1>}
           <div className="company-check">
-            {company && company.mail && (
+            {company && company.email && (
               <h1>{`${company.name} is already associated!`}</h1>
             )}
           </div>
@@ -74,18 +78,47 @@ const Company = () => {
           </h1>
           <form onSubmit={RegisterCompany} style={{ margin: "40px" }}>
             <input
-              name="title"
+              name="name"
               onChange={handleChange}
               type="text"
-              placeholder="Enter title..."
-            ></input>
+              placeholder="Enter company name..."
+            />
             <input
-              name="description"
+              name="registrationNumber"
               onChange={handleChange}
               type="text"
-              placeholder="Enter description..."
-            ></input>
-            {/**All I can think of for now */}
+              placeholder="Enter registration number..."
+            />
+            <input
+              name="address"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter address..."
+            />
+            <input
+              name="country"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter country..."
+            />
+            <input
+              name="email"
+              onChange={handleChange}
+              type="email"
+              placeholder="Enter email..."
+            />
+            <input
+              name="phone"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter phone number..."
+            />
+            <input
+              name="website"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter website (optional)..."
+            />
             <button
               type="submit"
               disabled={loading}

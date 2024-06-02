@@ -61,7 +61,7 @@ const Affiliates = () => {
         <div className="container">
           <form onSubmit={Affiliates}>
             <h1>Become an Affiliate Today!</h1>
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} onClick={()=>{alert("Joined affiliate program!")}}>
               Join!
             </button>
           </form>

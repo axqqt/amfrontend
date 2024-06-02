@@ -108,7 +108,7 @@ const Dashboard = () => {
       {loading ? (
         <div className="loading-spinner"></div>
       ) : (
-        <div className="dashboard-content" style={{ textAlign: "center" }}>
+        <div className="dashboard-content" style={{ textAlign: "center",color:"white" }}>
           <h1>Dashboard</h1>
           <br />
           <div className="welcome-message">
