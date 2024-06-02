@@ -98,23 +98,24 @@ function App({ location }) {
           <Nav />
           <ChatBox /> {/**Plugged to gemini */}
           <Routes>
-            {/**There needs to be a ranking system! */}
+            {/**There needs to be a ranking system! (BACKEND) */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
             <Route path="/more" element={<SeeMore />} />
             {/**View more about a product */}
             <Route path="/company" element={<Company />}></Route>
+            {/**Company related */}
             <Route path="/register" element={<Register />} /> {/**Register*/}
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/affiliates" element={<Affiliates />} />
+            {/**Joins program (non affiliated existing users ONLY) */}
             {/**company &&  */}
             <Route path="/mybasket" element={<MyBasket />}></Route>
             {/**User's basket (CAN CANCEL ORDERS) */}
-            {/**Joins program (existing user) */}
             <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             {/**Search bar*/}
             <Route path="/procedure" element={<Procedure />} />
-            {/**How to start*/}
+            {/**How to get started*/}
             <Route
               path="/purchase/:id"
               element={company && <BuyProduct />}
@@ -129,21 +130,25 @@ function App({ location }) {
               path="/dashboard"
               element={(company || affiliate) && <Dashboard />}
             /> */}
-            <Route path="/dashboard" element={<Dashboard/>}></Route>
-            {/**Calculates earnings */}
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            {/**Calculates earnings and traces -> reporting back to user + company */}
             <Route path="/product/:id" element={<Product />} />
-            {/**Redirects to product */}
+            {/**Redirects hashed link to product */}
             {/* {company && company.gmail && (
               <Route path="/create" element={<Create />} />
             )} */}
-          <Route path="/create" element={<Create />} />
-            {/**Create COMPANY listing*/}
-            <Route path="social" element={<Social />}></Route>
-            {/**Social Section */}
-            <Route path="/write" element={<CreatePost />} />
-            {/**Create social post*/}
-            <Route path="*" element={<NotFound />}></Route>
-            {/**Handles exceptions */}
+            {company && ( //companies , verified users and affiliates should be able to write!
+              <div>
+                <Route path="/create" element={<Create />} />
+                {/**Create COMPANY listing*/}
+                <Route path="social" element={<Social />}></Route>
+                {/**Social Section */}
+                <Route path="/write" element={<CreatePost />} />
+                {/**Create social post*/}
+                <Route path="*" element={<NotFound />}></Route>
+                {/**Handles exceptions */}
+              </div>
+            )}
           </Routes>
         </Suspense>
       </UserContext.Provider>
