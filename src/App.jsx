@@ -46,29 +46,28 @@ function App({ location }) {
   const [showMiniGame, setShowMiniGame] = useState(false);
   const [gameCounter, setGameCounter] = useState(0);
 
-  
-
-  async function updateScore(){
-    try{
+  async function updateScore() {
+    try {
       setLoading(true);
-      await Axios.put(`${BASE}/affiliates/score`,{score}).then((response)=>{
-        if(response.status===200){
-          console.log("Recorded!");
-        }else{
-          console.log("Error while recording!");
+      await Axios.put(`${BASE}/affiliates/score`, { score }).then(
+        (response) => {
+          if (response.status === 200) {
+            console.log("Recorded!");
+          } else {
+            console.log("Error while recording!");
+          }
         }
-      })
-    }catch(err){
+      );
+    } catch (err) {
       console.error(err);
-    }finally{
+    } finally {
       setLoading(false);
     }
   }
 
-
-  useEffect(()=>{
+  useEffect(() => {
     updateScore();
-  },[score]);
+  }, [score]);
 
   const BASE = "http://localhost:8000";
   const MAX_GAMES_PER_SESSION = 3; // Maximum number of mini-games per session
@@ -139,7 +138,7 @@ function App({ location }) {
     toggleBot,
     setToggleBot,
     score,
-    setScore
+    setScore,
   };
 
   const getRandomMiniGame = () => {
@@ -156,7 +155,9 @@ function App({ location }) {
           {showMiniGame && (
             <div className="mini-game-wrapper">
               {getRandomMiniGame()}
-              <button className="skip-button" onClick={handleSkipGame}>Skip</button>
+              <button className="skip-button" onClick={handleSkipGame}>
+                Skip
+              </button>
             </div>
           )}
           <Routes>
@@ -168,7 +169,8 @@ function App({ location }) {
             {/**Company related */}
             {!user?.gmail && (
               <>
-                <Route path="/register" element={<Register />} /> {/**Register*/}
+                <Route path="/register" element={<Register />} />{" "}
+                {/**Register*/}
                 <Route path="/login" element={<Login />} /> {/**Login*/}
               </>
             )}
@@ -191,11 +193,11 @@ function App({ location }) {
               element={company && <Confirmation />}
             ></Route>
             {/**Order confirmation*/}
-            {user?.role !== 'user' && (
+            {user?.role !== "user" && company._id !== null && (
               <Route path="/create" element={<Create />} />
             )}
-            <Route path="/claims/:id/:price" element={<Claims/>}></Route>
             {/**Create COMPANY listing for non-normal users*/}
+            <Route path="/claims/:id/:price" element={<Claims />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
             {/**Calculates earnings and traces -> reporting back to user + company */}
             <Route path="/product/:id" element={<Product />} />
