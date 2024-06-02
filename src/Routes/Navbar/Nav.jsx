@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../../App";
@@ -10,7 +11,7 @@ export function Logout() {
 }
 
 const Nav = () => {
-  const { company } = useContext(UserContext);
+  const { company,user } = useContext(UserContext);
   const location = useLocation();
 
   const isBaseRoute = location.pathname === "/";

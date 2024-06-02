@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useContext } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./Routes/NotFound/NotFound";
 import "./index.css";
@@ -16,6 +16,8 @@ import BuyProduct from "./Routes/Product/BuyProduct";
 import Confirmation from "./Routes/Product/Confirmation";
 import Company from "./Routes/Company/Company";
 import MyBasket from "./Routes/MyOrders/MyBasket";
+import MiniGame from "./components/Games/MiniGame";
+import MiniGame2 from "./components/Games/MiniGame2";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -33,10 +35,11 @@ export const UserContext = React.createContext();
 
 function App({ location }) {
   const [loading, setLoading] = useState(false);
-  const [company, setCompany] = useState({}); //containing user at the moment needs to be divided to user and company
-  const [user, setUser] = useState({}); //for the user
+  const [company, setCompany] = useState({}); // containing user at the moment, needs to be divided to user and company
+  const [user, setUser] = useState({}); // for the user
   const [affiliate, setAffiliate] = useState(true);
   const [toggleBot, setToggleBot] = useState(false);
+  const [score, setScore] = useState(0);
 
   const BASE = "http://localhost:8000";
 
@@ -89,6 +92,13 @@ function App({ location }) {
     setUser,
     toggleBot,
     setToggleBot,
+    score,
+    setScore
+  };
+
+  const getRandomMiniGame = () => {
+    const games = [<MiniGame key="game1" />, <MiniGame2 key="game2" />];
+    return games[Math.floor(Math.random() * games.length)];
   };
 
   return (
@@ -97,6 +107,7 @@ function App({ location }) {
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
           <ChatBox /> {/**Plugged to gemini */}
+          {affiliate && getRandomMiniGame()} {/**Gamification */}
           <Routes>
             {/**There needs to be a ranking system! (BACKEND) */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
