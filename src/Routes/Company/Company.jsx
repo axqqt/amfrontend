@@ -14,7 +14,7 @@ const Company = () => {
   async function CompanyCheck() {
     try {
       setLoading(true);
-      await Axios.post(`${BASE}/company`, { company }).then((data) => {
+      await Axios.post(`${BASE}/company/validation`, { company }).then((data) => {
         if (data.status === 404) {
           RegisterCompany();
         } else if (data.status === 200) {

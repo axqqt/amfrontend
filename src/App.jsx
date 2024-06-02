@@ -40,8 +40,12 @@ function App({ location }) {
   const [affiliate, setAffiliate] = useState(true);
   const [toggleBot, setToggleBot] = useState(false);
   const [score, setScore] = useState(0);
+  const [showMiniGame, setShowMiniGame] = useState(false);
+  const [gameCounter, setGameCounter] = useState(0);
 
   const BASE = "http://localhost:8000";
+  const MAX_GAMES_PER_SESSION = 3; // Maximum number of mini-games per session
+  const COOLDOWN_PERIOD = 30000; // Cooldown period between mini-games in milliseconds (30 seconds)
 
   const [status, setStatus] = useState("");
   location = useLocation();
@@ -78,6 +82,21 @@ function App({ location }) {
     }
   }, [location.pathname, setCompany]);
 
+  useEffect(() => {
+    if (affiliate && gameCounter < MAX_GAMES_PER_SESSION) {
+      const gameTimer = setTimeout(() => {
+        setShowMiniGame(true);
+        setGameCounter((prevCounter) => prevCounter + 1);
+      }, COOLDOWN_PERIOD);
+
+      return () => clearTimeout(gameTimer);
+    }
+  }, [affiliate, gameCounter]);
+
+  const handleSkipGame = () => {
+    setShowMiniGame(false);
+  };
+
   const theStates = {
     company,
     setCompany,
@@ -107,7 +126,12 @@ function App({ location }) {
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
           <ChatBox /> {/**Plugged to gemini */}
-          {affiliate && getRandomMiniGame()} {/**Gamification */}
+          {showMiniGame && (
+            <div className="mini-game-wrapper">
+              {getRandomMiniGame()}
+              <button className="skip-button" onClick={handleSkipGame}>Skip</button>
+            </div>
+          )}
           <Routes>
             {/**There needs to be a ranking system! (BACKEND) */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
@@ -115,14 +139,17 @@ function App({ location }) {
             {/**View more about a product */}
             <Route path="/company" element={<Company />}></Route>
             {/**Company related */}
-            <Route path="/register" element={<Register />} /> {/**Register*/}
+            {!user?.gmail && (
+              <>
+                <Route path="/register" element={<Register />} /> {/**Register*/}
+                <Route path="/login" element={<Login />} /> {/**Login*/}
+              </>
+            )}
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/affiliates" element={<Affiliates />} />
             {/**Joins program (non affiliated existing users ONLY) */}
-            {/**company &&  */}
             <Route path="/mybasket" element={<MyBasket />}></Route>
             {/**User's basket (CAN CANCEL ORDERS) */}
-            <Route path="/login" element={<Login />} /> {/**Buggy */}
             <Route path="/search/:item" element={<Searched />} />
             {/**Search bar*/}
             <Route path="/procedure" element={<Procedure />} />
@@ -137,22 +164,14 @@ function App({ location }) {
               element={company && <Confirmation />}
             ></Route>
             {/**Order confirmation*/}
-            {/* <Route
-              path="/dashboard"
-              element={(company || affiliate) && <Dashboard />}
-            /> */}
+            {user?.role !== 'user' && (
+              <Route path="/create" element={<Create />} />
+            )}
+            {/**Create COMPANY listing for non-normal users*/}
             <Route path="/dashboard" element={<Dashboard />}></Route>
             {/**Calculates earnings and traces -> reporting back to user + company */}
             <Route path="/product/:id" element={<Product />} />
             {/**Redirects hashed link to product */}
-            {/* {company && company.gmail && (
-              <Route path="/create" element={<Create />} />
-            )} */}
-            {/* {company && ( //companies , verified users and affiliates should be able to write!
-         
-            )} */}
-            <Route path="/create" element={<Create />} />
-            {/**Create COMPANY listing*/}
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}
             <Route path="/write" element={<CreatePost />} />

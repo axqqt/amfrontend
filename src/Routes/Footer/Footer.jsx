@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "@/App";
 
-const Footer = () => {
-    // const { company } = useContext(UserContext);
+const Footer = ({ location }) => {
+  // const { company } = useContext(UserContext);
 
   return (
     <section className="w-full border-t border-border mt-5 pt-12 md:px-24 pb-5">
@@ -49,12 +51,14 @@ const Footer = () => {
               >
                 Sign in
               </Link>
-              <a
-                href="#feedback"
-                className="text-muted mt-2 hover:text-white transition-all"
-              >
-                Feedback
-              </a>
+              {location === "/" && (
+                <a
+                  href="#feedback"
+                  className="text-muted mt-2 hover:text-white transition-all"
+                >
+                  Feedback
+                </a>
+              )}
             </div>
           </div>
         </div>

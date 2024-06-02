@@ -78,9 +78,9 @@ const Nav = () => {
               <Button variant={"whiteMobile"}>Company Registration</Button>
             </Link>
             {isBaseRoute && (
-              <Link to="/feedback">
+              <a href="#feedback">
                 <Button variant={"whiteMobile"}>Feedback</Button>
-              </Link>
+              </a>
             )}
           </div>
         </div>
