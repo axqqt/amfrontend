@@ -20,6 +20,7 @@ import MyBasket from "./Routes/MyOrders/MyBasket";
 import MiniGame from "./components/Games/MiniGame";
 import MiniGame2 from "./components/Games/MiniGame2";
 import Axios from "axios";
+import Claims from "./Routes/Claims/Claims";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -193,6 +194,7 @@ function App({ location }) {
             {user?.role !== 'user' && (
               <Route path="/create" element={<Create />} />
             )}
+            <Route path="/claims/:id/:price" element={<Claims/>}></Route>
             {/**Create COMPANY listing for non-normal users*/}
             <Route path="/dashboard" element={<Dashboard />}></Route>
             {/**Calculates earnings and traces -> reporting back to user + company */}

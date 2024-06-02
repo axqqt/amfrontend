@@ -86,7 +86,12 @@ const Dashboard = () => {
       (response) => {
         if (response.status === 200) {
           //
+
           setStatus("Earnings claimed!");
+
+          setTimeout(() => {
+            navigator(`/claims/${user._id}/{earnings.price}`);
+          }, 2000);
         } else {
           setStatus("Error while processing , please check again later!");
         }
@@ -94,8 +99,12 @@ const Dashboard = () => {
     );
   }
 
+  useEffect(() => {
+    console.log(`The status is ${status}`);
+  }, [status]);
+
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" style={{color:"white"}}>
       {loading ? (
         <div className="loading-spinner"></div>
       ) : (
@@ -142,7 +151,14 @@ const Dashboard = () => {
               <span>$test</span>
             </label>
             <br />
-            <button onClick={()=>{claimMoney();alert(`Claimed LKR ${20}!`)}}>Claim!</button>
+            <button
+              onClick={() => {
+                claimMoney();
+                alert(`Claimed LKR ${20}!`);
+              }}
+            >
+              Claim!
+            </button>
           </div>
           {/* <div className="status">
             <h1>{status}</h1>

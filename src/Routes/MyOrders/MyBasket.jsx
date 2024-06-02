@@ -35,7 +35,7 @@ const MyBasket = () => {
         if (response.status === 200) {
           setStatus("Cancelled order!");
           setTimeout(()=>{
-            window.location.reload();
+            navigate("/mybasket")
           },1200)
         } else if (response.status === 404) {
           setStatus("No data found!");
