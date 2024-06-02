@@ -8,9 +8,11 @@ import { Line } from "react-chartjs-2";
 import "./Dashboard.css"; // Import your CSS file for styling
 
 const Dashboard = () => {
-  const { status, setStatus, BASE, company, loading, setLoading } =
+  const { status, setStatus, BASE, company, loading, setLoading, user } =
     useContext(UserContext);
   const [earnings, setEarnings] = useState([]);
+  const [loyaltyPoints, setLoyaltyPoints] = useState(0);
+  const [referralCount, setReferralCount] = useState(0);
 
   async function DashboardData() {
     try {
@@ -22,6 +24,22 @@ const Dashboard = () => {
       if (response.status === 200) {
         setEarnings(response.data);
         setStatus("Found");
+
+        // Calculate loyalty points
+        const totalEarnings = response.data.reduce(
+          (acc, curr) => acc + curr.amount,
+          0
+        );
+        const loyaltyPoints = Math.floor(totalEarnings / 10); // Example: 1 point for every $10 earned
+        setLoyaltyPoints(loyaltyPoints);
+
+        // Get referral count
+        const referralResponse = await Axios.get(
+          `${BASE}/affiliates/referral/count/${user._id}`
+        );
+        if (referralResponse.status === 200) {
+          setReferralCount(referralResponse.data.count);
+        }
       }
     } catch (err) {
       if (err.response && err.response.status === 404) {
@@ -63,12 +81,25 @@ const Dashboard = () => {
     },
   };
 
+  async function claimMoney() {
+    await Axios.post(`${BASE}/affiliates/claim/${user._id}`).then(
+      (response) => {
+        if (response.status === 200) {
+          //
+          setStatus("Earnings claimed!");
+        } else {
+          setStatus("Error while processing , please check again later!");
+        }
+      }
+    );
+  }
+
   return (
     <div className="dashboard-container">
       {loading ? (
         <div className="loading-spinner"></div>
       ) : (
-        <div className="dashboard-content">
+        <div className="dashboard-content" style={{ textAlign: "center" }}>
           <h1>Dashboard</h1>
           <br />
           <div className="welcome-message">
@@ -77,7 +108,12 @@ const Dashboard = () => {
           <div className="earnings-info">
             <div className="total-earnings">
               <label>Your total earnings : </label>
-              <span>${earnings.reduce((acc, curr) => acc + curr.amount, 0).toFixed(2)}</span>
+              <span>
+                $
+                {earnings
+                  .reduce((acc, curr) => acc + curr.amount, 0)
+                  .toFixed(2)}
+              </span>
             </div>
             <div className="rank-info">
               <label>Your Rank : </label>
@@ -86,17 +122,37 @@ const Dashboard = () => {
                   (company.rank || "bronze").slice(1)}
               </span>
             </div>
+            <div className="loyalty-points">
+              <label>Loyalty Points : </label>
+              <span>{loyaltyPoints}</span>
+            </div>
+            <div className="referral-count">
+              <label>Total Referrals : </label>
+              <span>{referralCount}</span>
+            </div>
           </div>
           {earnings.length > 0 && (
             <div className="earnings-chart">
               <Line data={data} options={options} />
             </div>
           )}
+          <div className="claim">
+            <label>
+              <span>Your comissions : </span>
+              <span>$test</span>
+            </label>
+            <br />
+            <button onClick={()=>{claimMoney();alert(`Claimed LKR ${20}!`)}}>Claim!</button>
+          </div>
           {/* <div className="status">
             <h1>{status}</h1>
           </div> */}
           <div className="transaction-history">
             <h1>Transaction History</h1>
+            <label style={{ margin: "40px" }}>
+              <span>Test transaction 1</span>
+              <span>Test transaction 2</span>
+            </label>
             <ul>
               {earnings.map((entry, index) => (
                 <li key={index}>

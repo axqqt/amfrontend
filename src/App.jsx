@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, Suspense, useContext } from "react";
@@ -18,6 +19,7 @@ import Company from "./Routes/Company/Company";
 import MyBasket from "./Routes/MyOrders/MyBasket";
 import MiniGame from "./components/Games/MiniGame";
 import MiniGame2 from "./components/Games/MiniGame2";
+import Axios from "axios";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -42,6 +44,30 @@ function App({ location }) {
   const [score, setScore] = useState(0);
   const [showMiniGame, setShowMiniGame] = useState(false);
   const [gameCounter, setGameCounter] = useState(0);
+
+  
+
+  async function updateScore(){
+    try{
+      setLoading(true);
+      await Axios.put(`${BASE}/affiliates/score`,{score}).then((response)=>{
+        if(response.status===200){
+          console.log("Recorded!");
+        }else{
+          console.log("Error while recording!");
+        }
+      })
+    }catch(err){
+      console.error(err);
+    }finally{
+      setLoading(false);
+    }
+  }
+
+
+  useEffect(()=>{
+    updateScore();
+  },[score]);
 
   const BASE = "http://localhost:8000";
   const MAX_GAMES_PER_SESSION = 3; // Maximum number of mini-games per session
