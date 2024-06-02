@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { Line } from "react-chartjs-2";
-// import "./Dashboard.css"; // Import your CSS file for styling
+import "./Dashboard.css"; // Import your CSS file for styling
 
 const Dashboard = () => {
   const { status, setStatus, BASE, company, loading, setLoading } =
@@ -23,7 +23,7 @@ const Dashboard = () => {
         setStatus("Found");
       }
     } catch (err) {
-      if (err.status === 404) {
+      if (err.response && err.response.status === 404) {
         setStatus("No results found!");
       }
       console.error(err);
@@ -65,34 +65,47 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {loading ? (
-        <h1>Loading...</h1>
+        <div className="loading-spinner"></div>
       ) : (
-       (
-          <div className="dashboard-content">
-            <h1>Dashboard</h1>
-            <div className="welcome-message">
-              <h1>{`Welcome back, ${company?.username}!`}</h1>
+        <div className="dashboard-content">
+          <h1>Dashboard</h1>
+          <br />
+          <div className="welcome-message">
+            <h1>{`Welcome back, ${company?.username}!`}</h1>
+          </div>
+          <div className="earnings-info">
+            <div className="total-earnings">
+              <label>Your total earnings : </label>
+              <span>${earnings.reduce((acc, curr) => acc + curr.amount, 0).toFixed(2)}</span>
             </div>
-            <div className="earnings-info">
-              <div className="total-earnings">
-                <label>Your total earnings:</label>
-                <h2>${earnings.reduce((acc, curr) => acc + curr.amount, 0)}</h2>
-              </div>
-              <div className="rank-info">
-                <label>Your Rank:</label>
-                <h2>{company.rank}</h2> {/* Assuming company.rank holds the rank info */}
-              </div>
+            <div className="rank-info">
+              <label>Your Rank : </label>
+              <span>
+                {(company.rank || "bronze").charAt(0).toUpperCase() +
+                  (company.rank || "bronze").slice(1)}
+              </span>
             </div>
+          </div>
+          {earnings.length > 0 && (
             <div className="earnings-chart">
               <Line data={data} options={options} />
             </div>
-            <div className="status">
-              <h1>{status}</h1>
-            </div>
+          )}
+          {/* <div className="status">
+            <h1>{status}</h1>
+          </div> */}
+          <div className="transaction-history">
+            <h1>Transaction History</h1>
+            <ul>
+              {earnings.map((entry, index) => (
+                <li key={index}>
+                  {entry.date}: ${entry.amount}
+                </li>
+              ))}
+            </ul>
           </div>
-        )
+        </div>
       )}
-      
     </div>
   );
 };

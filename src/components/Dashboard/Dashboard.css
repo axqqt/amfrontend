@@ -1,0 +1,77 @@
+.dashboard-container {
+    color: white;
+    font-size: 28px;
+    padding: 20px;
+    height: max-content;
+    width: max-content;
+    background-color: #282c34;
+  }
+  
+  .dashboard-content {
+    margin: 40px;
+  }
+  
+  .loading-spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: auto;
+  }
+  
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .welcome-message {
+    margin-bottom: 20px;
+  }
+  
+  .earnings-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .total-earnings,
+  .rank-info {
+    margin-bottom: 10px;
+  }
+  
+  .earnings-chart {
+    margin-bottom: 20px;
+  }
+  
+  .transaction-history {
+    margin-top: 20px;
+  }
+  
+  .transaction-history ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .transaction-history li {
+    background: rgba(75, 192, 192, 0.2);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

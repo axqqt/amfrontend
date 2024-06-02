@@ -3,7 +3,7 @@
 import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Company = () => {
   const { loading, setLoading, BASE, status, setStatus, company, setCompany } =
@@ -59,31 +59,55 @@ const Company = () => {
 
   return (
     <div>
-      <div className="container" style={{color:"white",margin:"40px"}}>
-        {loading && <h1>Loading...</h1>}
-        <div className="company-check">
-          {company && company.mail && <h1>{`${company.name} is already associated!`}</h1>}
+      {!company ? (
+        <div className="container" style={{ color: "white", margin: "40px" }}>
+          {loading && <h1>Loading...</h1>}
+          <div className="company-check">
+            {company && company.mail && (
+              <h1>{`${company.name} is already associated!`}</h1>
+            )}
+          </div>
+          <h1 style={{ textAlign: "center", fontSize: 32 }}>
+            Company Registration!
+          </h1>
+          <form onSubmit={RegisterCompany} style={{ margin: "40px" }}>
+            <input
+              name="title"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter title..."
+            ></input>
+            <input
+              name="description"
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter description..."
+            ></input>
+            {/**All I can think of for now */}
+            <button
+              type="submit"
+              disabled={loading}
+              style={{ padding: "40px" }}
+            >
+              Register!
+            </button>
+          </form>
         </div>
-        <h1 style={{textAlign:'center',fontSize:32}}>Company Registration!</h1>
-        <form onSubmit={RegisterCompany} style={{margin:"40px"}}>
-          <input
-            name="title"
-            onChange={handleChange}
-            type="text"
-            placeholder="Enter title..."
-          ></input>
-          <input
-            name="description"
-            onChange={handleChange}
-            type="text"
-            placeholder="Enter description..."
-          ></input>
-          {/**All I can think of for now */}
-          <button type="submit" disabled={loading} style={{padding:"40px"}}>
-            Register!
-          </button>
-        </form>
-      </div>
+      ) : (
+        <div
+          className="exists"
+          style={{
+            color: "white",
+            margin: "40px",
+            padding:"40px",
+            fontSize: 32,
+            textAlign: "center",
+          }}
+        >
+          <h1>Your company has already been registered!</h1>
+          <Link to={"/"}>Go back home?</Link>
+        </div>
+      )}
     </div>
   );
 };

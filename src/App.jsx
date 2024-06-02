@@ -34,7 +34,7 @@ export const UserContext = React.createContext();
 function App({ location }) {
   const [loading, setLoading] = useState(false);
   const [company, setCompany] = useState({}); //containing user at the moment needs to be divided to user and company
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({}); //for the user
   const [affiliate, setAffiliate] = useState(true);
   const [toggleBot, setToggleBot] = useState(false);
 
@@ -137,18 +137,17 @@ function App({ location }) {
             {/* {company && company.gmail && (
               <Route path="/create" element={<Create />} />
             )} */}
-            {company && ( //companies , verified users and affiliates should be able to write!
-              <div>
-                <Route path="/create" element={<Create />} />
-                {/**Create COMPANY listing*/}
-                <Route path="social" element={<Social />}></Route>
-                {/**Social Section */}
-                <Route path="/write" element={<CreatePost />} />
-                {/**Create social post*/}
-                <Route path="*" element={<NotFound />}></Route>
-                {/**Handles exceptions */}
-              </div>
-            )}
+            {/* {company && ( //companies , verified users and affiliates should be able to write!
+         
+            )} */}
+            <Route path="/create" element={<Create />} />
+            {/**Create COMPANY listing*/}
+            <Route path="social" element={<Social />}></Route>
+            {/**Social Section */}
+            <Route path="/write" element={<CreatePost />} />
+            {/**Create social post*/}
+            <Route path="*" element={<NotFound />}></Route>
+            {/**Handles exceptions */}
           </Routes>
         </Suspense>
       </UserContext.Provider>
