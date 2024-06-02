@@ -154,8 +154,8 @@ function App({ location }) {
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
           {affiliate && <Popup/>} {/**Quiz for affiliates */}
-          <ChatBox /> {/**Plugged to gemini */}
-          {showMiniGame &&  affiliate && (
+          {user && company && <ChatBox/>}
+          {showMiniGame &&  affiliate &&(
             <div className="mini-game-wrapper">
               {getRandomMiniGame()}
               <button className="skip-button" onClick={handleSkipGame}>
@@ -167,7 +167,7 @@ function App({ location }) {
             {/**There needs to be a ranking system! (BACKEND) */}
             <Route path="/" element={<Home />} /> {/**Homepage*/}
             <Route path="/more" element={<SeeMore />} />
-            {/**View more about a product */}
+            {/**View more products */}
             <Route path="/company" element={<Company />}></Route>
             {/**Company related */}
             {!user?._id && (
@@ -202,8 +202,8 @@ function App({ location }) {
             {/**Create COMPANY listing for non-normal users*/}
             <Route path="/claims/:id/:price" element={<Claims />}></Route> {/**Claiming comissions */}
             {/* <Route path="/dashboard" element={affiliate._id && <Dashboard />}></Route> */}
-            {/**Commented out for test */}
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            {/**Commented out for test 👆🏻 */}
+            <Route path="/dashboard" element={affiliate && <Dashboard />}></Route>
             {/* <Route path="/companydashboard" element={company._id && <CompanyDashboard/>}></Route> */}
             <Route
               path="/companydashboard"

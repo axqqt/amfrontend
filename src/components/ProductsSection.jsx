@@ -6,7 +6,8 @@ import Axios from "axios";
 import { UserContext } from "@/App";
 
 function ProductsSection() {
-  const { loading, setLoading, BASE, status, setStatus } = useContext(UserContext);
+  const { loading, setLoading, BASE, status, setStatus } =
+    useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [selectedProductType, setSelectedProductType] = useState("all");
@@ -16,7 +17,9 @@ function ProductsSection() {
   async function fetchContent() {
     try {
       setLoading(true);
-      const response = await Axios.get(`${BASE}/mains?type=${selectedType}&productType=${selectedProductType}`);
+      const response = await Axios.get(
+        `${BASE}/mains?type=${selectedType}&productType=${selectedProductType}`
+      );
       if (response.status === 200) {
         setData(response.data);
       } else if (response.status === 404) {
@@ -31,6 +34,8 @@ function ProductsSection() {
       setLoading(false);
     }
   }
+
+  let differentProducts = false;
 
   useEffect(() => {
     fetchContent();
@@ -49,7 +54,11 @@ function ProductsSection() {
   };
 
   return (
-    <section className="lg:px-24 py-12 flex justify-center items-start" id="products" style={{ color: "white" }}>
+    <section
+      className="lg:px-24 py-12 flex justify-center items-start"
+      id="products"
+      style={{ color: "white" }}
+    >
       {loading && <h1 style={{ color: "white" }}>Loading...</h1>}
       <div className="container flex flex-col">
         <div className="flex justify-between items-center w-full">
@@ -68,15 +77,17 @@ function ProductsSection() {
               <option value="home">Home</option>
               <option value="outdoors">Outdoors</option>
             </select>
-            <select
-              value={selectedProductType}
-              className="p-2 rounded-lg bg-slate-900 border border-border text-white"
-              onChange={handleProductTypeChange}
-            >
-              <option value="all">All</option>
-              <option value="physical">Physical</option>
-              <option value="digital">Digital</option>
-            </select>
+            {differentProducts && (
+              <select
+                value={selectedProductType}
+                className="p-2 rounded-lg bg-slate-900 border border-border text-white"
+                onChange={handleProductTypeChange}
+              >
+                <option value="all">All</option>
+                <option value="physical">Physical</option>
+                <option value="digital">Digital</option>
+              </select>
+            )}
           </div>
         </div>
 
@@ -90,6 +101,7 @@ function ProductsSection() {
                   .slice(0, visibleCards) // Limit to visibleCards
                   .map((item) => (
                     <Link to={`/product/${item._id}`} key={item._id}>
+                      {item?.selectedProductType && (differentProducts = true)}
                       <div
                         key={item._id}
                         className="flex flex-col justify-between gap-6 items-center border border-border p-5 rounded-xl hover:scale-105 transition-all"
@@ -113,7 +125,9 @@ function ProductsSection() {
 
                         <div className="flex justify-between items-center w-full">
                           <div>
-                            <h1 className="text-white font-bold text-lg">{item.title}</h1>
+                            <h1 className="text-white font-bold text-lg">
+                              {item.title}
+                            </h1>
                             <h3 className="text-muted mt-3 text-sm">
                               Commission: {item.commission}% / sale
                             </h3>
@@ -137,7 +151,10 @@ function ProductsSection() {
 
         {data.length > visibleCards && (
           <div className="flex justify-center mt-4">
-            <button className="text-white hover:text-muted transition-all" onClick={handleSeeMore}>
+            <button
+              className="text-white hover:text-muted transition-all"
+              onClick={handleSeeMore}
+            >
               See More
             </button>
           </div>
