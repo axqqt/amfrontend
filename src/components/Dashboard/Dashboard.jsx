@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     DashboardData();
-  }, [BASE]);
+  }, []);
 
   const data = {
     labels: earnings.map((entry) => entry.date),

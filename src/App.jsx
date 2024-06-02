@@ -133,9 +133,10 @@ function App({ location }) {
             {/**Calculates earnings */}
             <Route path="/product/:id" element={<Product />} />
             {/**Redirects to product */}
-            {company && company.gmail && (
+            {/* {company && company.gmail && (
               <Route path="/create" element={<Create />} />
-            )}
+            )} */}
+          <Route path="/create" element={<Create />} />
             {/**Create COMPANY listing*/}
             <Route path="social" element={<Social />}></Route>
             {/**Social Section */}

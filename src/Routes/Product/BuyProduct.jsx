@@ -118,7 +118,7 @@ const BuyProduct = () => {
 
   return (
     <div style={{ color: "white", padding: "20px" }}>
-      <h1>Checkout</h1>
+      <h1 style={{fontSize:32}}>Checkout</h1>
       {loading ? (
         <h1>Loading...</h1>
       ) : (

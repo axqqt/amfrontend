@@ -86,53 +86,66 @@ const Product = () => {
               </div>
             </div>
             <h1 style={{ color: "white" }}>{status}</h1>
-            {affiliate && (
+            {Data.commission && Data.price && affiliate && ( 
               <button
                 className="get-link"
                 style={{ color: "white" }}
                 onClick={openAffiliate}
               >
-                {!affiliateMenu ? <h1>     Get Affiliate Link</h1> : <h1>Hide Affiliate Menu!</h1>}
+                {!affiliateMenu ? (
+                  <h1> Get Affiliate Link</h1>
+                ) : (
+                  <h1>Hide Affiliate Menu!</h1>
+                )}
               </button>
             )}
-            {affiliate && affiliateMenu && (
-              <div className="affiliates" style={{ color: "wheat",margin:"80px" }}>
-                <div
-                  className="container"
-                  style={{ border: "10px solid white" }}
-                >
-                  <p
-                    className="text-white md:text-start text-center font-bold text-2xl mt-5"
-                    style={{ margin: "20px",padding:"40px" }}
+            {Data.comission && Data.price && (
+              <div>
+                {" "}
+                {affiliate && affiliateMenu && (
+                  <div
+                    className="affiliates"
+                    style={{ color: "wheat", margin: "80px" }}
                   >
-                    You will receive {Data.commission}% Commission Per Sale! ,
-                    approx.{" "}
-                    {Data.price / Data.commission !== null ? (
-                      Data.price / Data.commission
-                    ) : (
-                      <h1>0%</h1>
-                    )}
-                  </p>
-                  <div className="outcome">
-                    {Data.length ? (
-                      <div>
-                        <h1>Grab your link</h1>
-                        <button
-                          onClick={() => {
-                            setStatus("Link Copied!");
-                          }}
-                        >
-                          {Data?.affiliateLink}
-                        </button>
+                    <div
+                      className="container"
+                      style={{ border: "10px solid white" }}
+                    >
+                      <p
+                        className="text-white md:text-start text-center font-bold text-2xl mt-5"
+                        style={{ margin: "20px", padding: "40px" }}
+                      >
+                        You will receive {Data.commission}% Commission Per Sale!
+                        , approx.
+                        {parseInt(Data.price) / parseInt(Data.commission) !==
+                        null ? (
+                          parseInt(Data.price) / parseInt(Data.commission)
+                        ) : (
+                          <h1>No comission allocated for this product!</h1>
+                        )}
+                      </p>
+                      <div className="outcome">
+                        {Data.length ? (
+                          <div>
+                            <h1>Grab your link</h1>
+                            <button
+                              onClick={() => {
+                                setStatus("Link Copied!");
+                              }}
+                            >
+                              {Data?.affiliateLink}
+                            </button>
+                          </div>
+                        ) : (
+                          <div style={{ margin: "40px" }}>
+                            <h1>Error while getting your link</h1>
+                          </div>
+                        )}
                       </div>
-                    ) : (
-                      <div style={{margin:"40px"}}>
-                        <h1>Error while getting your link</h1>
-                      </div>
-                    )}
+                      {/* <h2>{status}</h2> */}
+                    </div>
                   </div>
-                  {/* <h2>{status}</h2> */}
-                </div>
+                )}
               </div>
             )}
             <div className="md:w-1/2 flex flex-col justify-between items-start gap-6 w-full">
@@ -147,7 +160,7 @@ const Product = () => {
               </div>
               <div className="w-full">
                 {/**Data.stock */}
-                { testData==="veloxal" ? ( 
+                {testData === "veloxal" ? (
                   <Link
                     to={`/purchase/${id}`}
                     target="_blank"
