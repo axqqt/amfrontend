@@ -182,10 +182,13 @@ function App({ location }) {
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/affiliates" element={<Affiliates />} />
             {/**Joins program (non affiliated existing users ONLY) */}
-            <Route path="/mybasket" element={<MyBasket />}></Route> 
-            <Route path="/refunds/:id" element={<ClearOutstandingDebts/>}></Route>
+            <Route path="/mybasket" element={<MyBasket />}></Route>
+            <Route
+              path="/debts"
+              element={<ClearOutstandingDebts />}
+            ></Route>
             {/**For users */}
-            <Route path="/companyproducts" element={<ProductsAdded/>}></Route> 
+            <Route path="/companyproducts" element={<ProductsAdded />}></Route>
             {/*For companies* */}
             {/**User's basket (CAN CANCEL ORDERS) */}
             <Route path="/search/:item" element={<Searched />} />

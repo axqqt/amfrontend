@@ -63,7 +63,7 @@ const Login = () => {
               Please enter your details to Login
             </h1>
           </div>
-          <div className="w-full">
+           <div className="w-full">
             <form onSubmit={userLogin} className="flex flex-col gap-3 mt-5">
               <input
                 onChange={handleChange}
@@ -87,7 +87,6 @@ const Login = () => {
             <div className="mt-4 text-start">
               <h1 className="text-gray-600">{status}</h1>
               <Link to="/register" className="text-blue-500 hover:underline">
-                {" "}
                 Not registered?
               </Link>
             </div>
