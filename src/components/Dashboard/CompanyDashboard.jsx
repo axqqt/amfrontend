@@ -1,23 +1,14 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import { UserContext } from "@/App";
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const CompanyDashboard = () => {
-  const { loading, setLoading, setStatus, BASE, company } = useContext(UserContext);
+  const { loading, setLoading, setStatus, BASE, company } =
+    useContext(UserContext);
   const [companyData, setCompanyData] = useState({});
   const [companyMenu, setCompanyMenu] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const stripe = useStripe();
-  const elements = useElements();
-
-  useEffect(() => {
-    fetchCompanyData();
-  }, []);
+  const [transactions, setTransactions] = useState([]);
 
   async function fetchCompanyData() {
     try {
@@ -25,6 +16,12 @@ const CompanyDashboard = () => {
       const response = await Axios.get(`${BASE}/mains/company/${company._id}`);
       if (response.status === 200) {
         setCompanyData(response.data);
+        // Set dummy transactions
+        setTransactions([
+          { id: 1, description: "Transaction 1", amount: 100 },
+          { id: 2, description: "Transaction 2", amount: 150 },
+          { id: 3, description: "Transaction 3", amount: 200 },
+        ]);
       } else {
         setStatus("No results found!");
       }
@@ -38,27 +35,22 @@ const CompanyDashboard = () => {
   async function clearDebts() {
     try {
       setLoading(true);
-      const response = await Axios.post(`${BASE}/mains/pay-debts`, {
-        companyId: company._id,
-        amount: companyData.outstandingBalance
-      });
-
+      const response = await Axios.get(`${BASE}/mains/refunds/${company._id}`);
       if (response.status === 200) {
-        setPaymentSuccess(true);
-        setCompanyData(prevCompanyData => ({
-          ...prevCompanyData,
-          outstandingBalance: 0 // Assuming the outstanding balance is set to 0 after payment
-        }));
+        localStorage.setItem("companyDebts", companyData);
       } else {
-        setStatus("Payment failed");
+        setStatus("No results found!");
       }
     } catch (error) {
       console.error(error);
-      setStatus("Payment failed");
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    fetchCompanyData();
+  }, []);
 
   return (
     <div className="company-dashboard" style={{ color: "white", fontSize: 22 }}>
@@ -98,15 +90,18 @@ const CompanyDashboard = () => {
           <div className="transactions" style={{ margin: "40px" }}>
             <h1>Transaction History</h1>
             <br />
-            <span style={{ padding: "40px" }}>
-              <label>Testing 1</label>
-              <label>Testing 2</label>
-            </span>
-            <div className="pay-affiliates" style={{margin:"40px"}}>
+            <div style={{ padding: "40px" }}>
+              {transactions.map((transaction,index) => (
+                <div key={transaction.id || index}>
+                  <p>{transaction.description}: ${transaction.amount}</p>
+                </div>
+              ))}
+            </div>
+            <div className="pay-affiliates" style={{ margin: "40px" }}>
               <button
                 onClick={clearDebts}
-                style={{padding:"40px",border:"12px solid white"}}
-                disabled={companyData.outstandingBalance <= 0 || paymentSuccess}
+                style={{ padding: "40px", border: "12px solid white" }}
+                disabled={companyData.outstandingBalance < 0}
               >
                 {companyData.outstandingBalance > 0
                   ? "Pay"

@@ -104,11 +104,14 @@ const Dashboard = () => {
   }, [status]);
 
   return (
-    <div className="dashboard-container" style={{color:"white"}}>
+    <div className="dashboard-container" style={{ color: "white" }}>
       {loading ? (
         <div className="loading-spinner"></div>
       ) : (
-        <div className="dashboard-content" style={{ textAlign: "center",color:"white" }}>
+        <div
+          className="dashboard-content"
+          style={{ textAlign: "center", color: "white" }}
+        >
           <h1>Dashboard</h1>
           <br />
           <div className="welcome-message">
@@ -145,21 +148,7 @@ const Dashboard = () => {
               <Line data={data} options={options} />
             </div>
           )}
-          <div className="claim">
-            <label>
-              <span>Your comissions : </span>
-              <span>$test</span>
-            </label>
-            <br />
-            <button
-              onClick={() => {
-                claimMoney();
-                alert(`Claimed LKR ${20}!`);
-              }}
-            >
-              Claim!
-            </button>
-          </div>
+
           {/* <div className="status">
             <h1>{status}</h1>
           </div> */}
@@ -176,6 +165,21 @@ const Dashboard = () => {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="claim" style={{ margin: "80px" }}>
+            <label>
+              <span>Your comissions : </span>
+              <span>$test</span>
+            </label>
+            <br />
+            <button
+              onClick={() => {
+                claimMoney();
+                alert(`Claimed (TEST ONLY) LKR ${20}!`);
+              }}
+            >
+              Claim!
+            </button>
           </div>
         </div>
       )}
