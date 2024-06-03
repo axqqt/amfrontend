@@ -55,7 +55,7 @@ const CompanyDashboard = () => {
   return (
     <div className="company-dashboard" style={{ color: "white", fontSize: 22 }}>
       <div className="container">
-        <h1>Company Dashboard</h1>
+        <h1>{`${company.name}'s Dashboard`}</h1>
       </div>
       {loading ? (
         <div className="container">

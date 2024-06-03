@@ -18,12 +18,18 @@ const Search = () => {
 
   async function Search(e) {
     e.preventDefault();
-    navigator(`/search/${search}`); //search is item
+    if (search !== "" || search.length > 0) {
+      navigator(`/search/${search}`); //search is item
+    } else {
+      setTimeout(() => {
+        setStatus("Search field is empty!");
+      }, 3000);
+    }
   }
 
   return (
     <div className="lg:px-24 w-full">
-      <div className="container">
+      <div className="container" style={{color:"white"}}> 
         <div className="flex justify-start items-start">
           <form onSubmit={Search} className="flex justify-start w-full  gap-3">
             <input
@@ -45,6 +51,7 @@ const Search = () => {
             </Button>
           </form>
         </div>
+        <h2 style={{margin:"40px"}}>{status}</h2>
       </div>
     </div>
   );

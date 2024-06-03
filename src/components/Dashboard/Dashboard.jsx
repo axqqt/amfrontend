@@ -8,7 +8,7 @@ import { Line } from "react-chartjs-2";
 import "./Dashboard.css"; // Import your CSS file for styling
 
 const Dashboard = () => {
-  const { status, setStatus, BASE, company, loading, setLoading, user } =
+  const { status, setStatus, BASE, loading, setLoading, user } =
     useContext(UserContext);
   const [earnings, setEarnings] = useState([]);
   const [loyaltyPoints, setLoyaltyPoints] = useState(0);
@@ -18,7 +18,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await Axios.post(`${BASE}/affiliates/comissions`, {
-        affiliate: company._id,
+        affiliate: user._id,
       });
 
       if (response.status === 200) {
@@ -112,10 +112,10 @@ const Dashboard = () => {
           className="dashboard-content"
           style={{ textAlign: "center", color: "white" }}
         >
-          <h1>Dashboard</h1>
+          <h1>{`${user.username}'s Dashboard`}</h1>
           <br />
           <div className="welcome-message">
-            <h1>{`Welcome back, ${company?.username}!`}</h1>
+            <h1>{`Welcome back, ${user?.username}!`}</h1>
           </div>
           <div className="earnings-info">
             <div className="total-earnings">
@@ -130,8 +130,8 @@ const Dashboard = () => {
             <div className="rank-info">
               <label>Your Rank : </label>
               <span>
-                {(company.rank || "bronze").charAt(0).toUpperCase() +
-                  (company.rank || "bronze").slice(1)}
+                {(user.rank || "bronze").charAt(0).toUpperCase() +
+                  (user.rank || "bronze").slice(1)}
               </span>
             </div>
             <div className="loyalty-points">
