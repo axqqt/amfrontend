@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import { Button } from "@/components/ui/button";
 
 const Create = () => {
-  const { loading, setLoading, BASE, status, setStatus, company } =
-    useContext(UserContext);
+  const { loading, setLoading, BASE, status, setStatus, company } = useContext(UserContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -15,12 +13,37 @@ const Create = () => {
     link: "",
     category: "",
     commission: "",
+    price: "",
+    productType: "physical", // Default value
   });
 
   const navigator = useNavigate();
+  const commissionRef = useRef();
+  const priceRef = useRef();
+
+  useEffect(() => {
+    if (formData.commission && parseFloat(formData.commission) < 5) {
+      alert("Commission rate must be minimum 5%");
+      commissionRef.current.focus();
+    }
+  }, [formData.commission]);
 
   const addContent = async (e) => {
     e.preventDefault();
+
+    // Validate Commission and Price
+    if (parseFloat(formData.commission) < 5) {
+      setStatus("Error: Commission must be at least 5%");
+      commissionRef.current.focus();
+      return;
+    }
+
+    if (parseFloat(formData.price) <= 0) {
+      setStatus("Error: Price must be a positive number");
+      priceRef.current.focus();
+      return;
+    }
+
     try {
       setLoading(true);
       const formDataToSend = new FormData();
@@ -29,17 +52,13 @@ const Create = () => {
       formDataToSend.append("link", formData.link);
       formDataToSend.append("category", formData.category);
       formDataToSend.append("commission", formData.commission);
-      formDataToSend.append("userId", company._id); // Add userId
-      formDataToSend.append("media", formData.video); // Change 'video' to 'media'
-      console.log(
-        formData.title,
-        formData.description,
-        formData.link,
-        formData.category,
-        formData.commission,
-        company._id
-      );
-      const response = await Axios.post(`${BASE}/`, formDataToSend); // Send to root route
+      formDataToSend.append("price", formData.price);
+      formDataToSend.append("productType", formData.productType);
+      formDataToSend.append("userId", company._id);
+      formDataToSend.append("media", formData.video);
+      formDataToSend.append("mediaType", formData.video.type.startsWith("video") ? "video" : "image");
+
+      const response = await Axios.post(`${BASE}/content`, formDataToSend);
       if (response.status === 201) {
         setStatus("Content Added");
         setFormData({
@@ -49,6 +68,8 @@ const Create = () => {
           link: "",
           category: "",
           commission: "",
+          price: "",
+          productType: "physical",
         });
         navigator("/");
       }
@@ -67,13 +88,13 @@ const Create = () => {
   };
 
   return (
-    <section className="flex flex-col justify-between items-center w-full lg:p-24 h-full" style={{color:"white"}}>
+    <section className="flex flex-col justify-between items-center w-full lg:p-24 h-full" style={{ color: "white" }}>
       {loading && <h1>Loading...</h1>}
       <div className="container">
         <h1 className="text-3xl text-white font-bold mt-5 mb-5 text-center">
           Add Listing
         </h1>
-        <form onSubmit={addContent} className="w-full" style={{margin:"60px"}}>
+        <form onSubmit={addContent} className="w-full" style={{ margin: "60px" }}>
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 w-full">
             <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between">
               <h1 className="text-2xl text-primary font-bold">Main Details</h1>
@@ -98,6 +119,19 @@ const Create = () => {
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Enter description"
+                  className="p-2 rounded-lg"
+                  required
+                />
+              </div>
+              <div className="flex flex-col justify-between gap-2 mt-5">
+                <label className="text-white">Price:</label>
+                <input
+                  name="price"
+                  type="number"
+                  value={formData.price}
+                  onChange={handleChange}
+                  ref={priceRef}
+                  placeholder="Enter Price"
                   className="p-2 rounded-lg"
                   required
                 />
@@ -128,14 +162,28 @@ const Create = () => {
                 <label className="text-white">Commission:</label>
                 <input
                   name="commission"
-                  type="text"
+                  type="number"
                   value={formData.commission}
                   min={5}
+                  ref={commissionRef}
                   onChange={handleChange}
                   placeholder="Enter Commission"
                   className="p-2 rounded-lg"
                   required
                 />
+              </div>
+              <div className="flex flex-col justify-between gap-2 mt-5">
+                <label className="text-white">Product Type:</label>
+                <select
+                  name="productType"
+                  className="p-2 rounded-lg"
+                  value={formData.productType}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="physical">Physical</option>
+                  <option value="digital">Digital</option>
+                </select>
               </div>
             </div>
             <div className="bg-slate-900 p-5 border border-border rounded-xl flex flex-col justify-between w-full md:col-span-2">

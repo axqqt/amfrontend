@@ -23,6 +23,7 @@ import Axios from "axios";
 import Claims from "./Routes/Claims/Claims";
 import CompanyDashboard from "./components/Dashboard/CompanyDashboard";
 import Popup from "./components/Games/Popup";
+import ProductsAdded from "./components/Dashboard/CompanyProducts/ProductsAdded";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -153,9 +154,9 @@ function App({ location }) {
       <UserContext.Provider value={theStates}>
         <Suspense fallback={<div>Loading...</div>}>
           <Nav />
-          {affiliate && <Popup/>} {/**Quiz for affiliates */}
-          {user && company && <ChatBox/>}
-          {showMiniGame &&  affiliate &&(
+          {affiliate && <Popup />} {/**Quiz for affiliates */}
+          {user && company && <ChatBox />}
+          {showMiniGame && affiliate && (
             <div className="mini-game-wrapper">
               {getRandomMiniGame()}
               <button className="skip-button" onClick={handleSkipGame}>
@@ -169,7 +170,7 @@ function App({ location }) {
             <Route path="/more" element={<SeeMore />} />
             {/**View more products */}
             <Route path="/company" element={<Company />}></Route>
-            {/**Company related */}
+            {/**Company registration */}
             {!user?._id && (
               <>
                 <Route path="/register" element={<Register />} />
@@ -180,7 +181,10 @@ function App({ location }) {
             <Route path="/contact" element={<Contact />} /> {/**Contact*/}
             <Route path="/affiliates" element={<Affiliates />} />
             {/**Joins program (non affiliated existing users ONLY) */}
-            <Route path="/mybasket" element={<MyBasket />}></Route>
+            <Route path="/mybasket" element={<MyBasket />}></Route> 
+            {/**For users */}
+            <Route path="/companyproducts" element={<ProductsAdded/>}></Route> 
+            {/*For companies* */}
             {/**User's basket (CAN CANCEL ORDERS) */}
             <Route path="/search/:item" element={<Searched />} />
             {/**Search bar*/}
@@ -200,11 +204,16 @@ function App({ location }) {
               <Route path="/create" element={<Create />} />
             )}
             {/**Create COMPANY listing for non-normal users*/}
-            <Route path="/claims/:id/:price" element={<Claims />}></Route> {/**Claiming comissions */}
+            <Route path="/claims/:id/:price" element={<Claims />}></Route>{" "}
+            {/**Claiming comissions */}
             {/* <Route path="/dashboard" element={affiliate._id && <Dashboard />}></Route> */}
             {/**Commented out for test 👆🏻 */}
-            <Route path="/dashboard" element={affiliate && <Dashboard />}></Route>
+            <Route
+              path="/dashboard"
+              element={affiliate && <Dashboard />}
+            ></Route>
             {/* <Route path="/companydashboard" element={company._id && <CompanyDashboard/>}></Route> */}
+            {/**Uncomment when needed 👆🏻 */}
             <Route
               path="/companydashboard"
               element={<CompanyDashboard />}

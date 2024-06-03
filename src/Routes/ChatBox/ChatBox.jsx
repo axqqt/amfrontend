@@ -72,7 +72,7 @@ function ChatBox() {
           />
         </div>
       ) : (
-        <div className="bot-response">
+        <div className="bot-response" style={{backgroundColor:"white",color:"black"}}>
           <form className="bot" onSubmit={GeminiCall}>
             <input
               onChange={handleChange}
