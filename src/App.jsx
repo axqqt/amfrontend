@@ -24,6 +24,7 @@ import Claims from "./Routes/Claims/Claims";
 import CompanyDashboard from "./components/Dashboard/CompanyDashboard";
 import Popup from "./components/Games/Popup";
 import ProductsAdded from "./components/Dashboard/CompanyProducts/ProductsAdded";
+import ClearOutstandingDebts from "./components/Dashboard/Payments/ClearOutstandingDebts";
 
 // Lazy load your route components
 const Home = React.lazy(() => import("./Routes/Home/Home"));
@@ -74,7 +75,7 @@ function App({ location }) {
 
   const BASE = "http://localhost:8000";
   const MAX_GAMES_PER_SESSION = 3; // Maximum number of mini-games per session
-  const COOLDOWN_PERIOD = 30000; // Cooldown period between mini-games in milliseconds (30 seconds)
+  const COOLDOWN_PERIOD = 600000; // Cooldown period between mini-games in milliseconds (10 minutes)
 
   const [status, setStatus] = useState("");
   location = useLocation();
@@ -182,6 +183,7 @@ function App({ location }) {
             <Route path="/affiliates" element={<Affiliates />} />
             {/**Joins program (non affiliated existing users ONLY) */}
             <Route path="/mybasket" element={<MyBasket />}></Route> 
+            <Route path="/refunds/:id" element={<ClearOutstandingDebts/>}></Route>
             {/**For users */}
             <Route path="/companyproducts" element={<ProductsAdded/>}></Route> 
             {/*For companies* */}

@@ -2,6 +2,7 @@
 import { UserContext } from "@/App";
 import { useContext, useEffect, useState } from "react";
 import Axios from "axios";
+import "./ChatBox.css"; // Import the CSS file
 
 function ChatBox() {
   const {
@@ -16,20 +17,7 @@ function ChatBox() {
   const [userAsks, setUserAsks] = useState({
     search: "",
   });
-  {
-    /**We can add other fields if we want to */
-  }
   const [geminiResponse, setGeminiResponse] = useState({});
-
-  // useEffect(() => {
-  //   {
-  //     toggleBot
-  //       ? console.log("NAHH DIS NPC OUT HERE")
-  //       : console.log("Nah bro chilling for now!");
-  //   }
-  // }, [toggleBot]);
-
-  //just a test lol
 
   async function GeminiCall(e) {
     e.preventDefault();
@@ -54,39 +42,37 @@ function ChatBox() {
   };
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          setToggleBot(!toggleBot);
-        }}
-      >
-        {!toggleBot ? "Open bot " : "Close bot"}
-      </button>
+    <div className="chatbox-container">
       {!toggleBot ? (
-        <div className="fixed bottom-10 p-3 left-10 bg-primary text-white rounded-full shadow-xl shadow-indigo-500/40">
+        <div className="chatbox-button" onClick={() => setToggleBot(!toggleBot)}>
           <img
-            width="32"
-            height="32"
             src="https://img.icons8.com/ios/50/FFFFFF/speech-bubble--v2.png"
             alt="speech-bubble--v2"
           />
         </div>
       ) : (
-        <div className="bot-response" style={{backgroundColor:"white",color:"black"}}>
-          <form className="bot" onSubmit={GeminiCall}>
-            <input
-              onChange={handleChange}
-              name="search"
-              placeholder="Ask me anything!"
-            ></input>
-            <button type="submit" disabled={loading}>
-              Ask Vexy!
-            </button>
-          </form>
-          <div className="response">
-            {geminiResponse.length && geminiResponse}
+        <div className="chatbox-content">
+          <div className="chatbox-header">
+            <h4>Ask Vexy</h4>
+            <button onClick={() => setToggleBot(!toggleBot)}>X</button>
           </div>
-          <h2>{status}</h2>
+          <div className="chatbox-body">
+            <form className="bot" onSubmit={GeminiCall}>
+              <input
+                onChange={handleChange}
+                name="search"
+                placeholder="Ask me anything!"
+                value={userAsks.search}
+              />
+              <button type="submit" disabled={loading}>
+                Ask Vexy!
+              </button>
+            </form>
+            <div className="response">
+              {geminiResponse.length ? geminiResponse : null}
+            </div>
+            <h2>{status}</h2>
+          </div>
         </div>
       )}
     </div>
